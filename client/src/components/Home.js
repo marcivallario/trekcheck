@@ -1,4 +1,3 @@
-import Header from './Header'
 import { KeyOutlined, FolderOpenOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import '../styles/home.css'
@@ -9,7 +8,6 @@ import { NavLink } from "react-router-dom";
 function Home() {
     return (
         <div id="home">
-            <Header />
             <div id="banner">
                 <div id="header">
                     <h1>All your trips, <br/> at your fingertips.</h1>
