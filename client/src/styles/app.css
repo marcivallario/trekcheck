@@ -1,0 +1,20 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Global */
+
+html {
+    scroll-behavior: smooth;
+}
