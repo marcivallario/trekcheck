@@ -1,0 +1,74 @@
+@import '~antd/dist/antd.css';
+
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger, .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark, .ant-layout-sider-trigger, .ant-menu.ant-menu-sub.ant-menu-inline, .ant-menu.ant-menu-root.ant-menu-vertical.ant-menu-dark.ant-menu-inline-collapsed, .ant-menu.ant-menu-sub.ant-menu-vertical {
+    background-color: rgb(77,98,109);
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #84949c;
+}
+
+.logo {
+    padding: 10%;
+    margin-bottom: 10%;
+}
+
+#home-small-card-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.small-dash-card {
+    display: inline-block;
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.ant-card {
+    border-radius: 15px;
+}
+
+.ant-statistic {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#twentyfour-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px
+}
+
+#twentyfour-grid > .twentyfour-item::before {
+    content: "";
+    padding-bottom: 100%;
+    display: block;
+}
+
+.twentyfour-item {
+    background: yellow;
+    padding: 1rem;
+}
+
+#twentyfour-grid > .twentyfour-item {
+  display: grid;
+}
+
+#twentyfour-grid > .twentyfour-item::before,
+#twentyfour-grid > .twentyfour-item > .ant-card.ant-card-bordered {
+  grid-area: 1 / 1 / 2 / 2;
+}
+

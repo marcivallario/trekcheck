@@ -1,0 +1,2 @@
+class FfnumbersController < ApplicationController
+end

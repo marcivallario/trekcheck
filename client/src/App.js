@@ -10,6 +10,7 @@ import './styles/app.css'
 function App() {
   const [ trips, setTrips ] = useState([])
   const [ projects, setProjects ] = useState([])
+  const [ passengers, setPassengers ] = useState([])
   const [ user, setUser ] = useState('')
 
   useEffect(() => {
@@ -20,18 +21,27 @@ function App() {
       }
     })}, [])
 
+    useEffect(() => {
+     if (user.id) {
+      fetch('/projects')
+       .then(res => res.json())
+       .then(projects => setProjects(projects))
+      }
+    }, [user])
+
   return (
     <div className="App">
-      <Header user ={user} setUser={setUser}/>
       <Switch>
         <Route path='/signup'>
-          {(!user) ? <Signup setUser={setUser} /> : <Home />}
+          <Header user ={user} setUser={setUser}/>
+          {(!user) ? <Signup setUser={setUser} /> : <div></div>}
         </Route>
         <Route path='/login'>
-          {(!user) ? <Login setUser={setUser} /> : <Home />}
+          <Header user ={user} setUser={setUser}/>
+          {(!user) ? <Login setUser={setUser} /> : <div></div>}
         </Route>
         <Route exact path="/">
-          {(!user) ? <Home/> : <Dashboard />}
+          {(!user) ? <> <Header /> <Home/> </>: <Dashboard projects={projects}/>}
         </Route>
       </Switch>
     </div>
