@@ -22,7 +22,7 @@ trip3 = Trip.create!(depart: DateTime.new(2022, 3, 10), return: DateTime.new(202
 flight3 = Flight.create(leg: 'return', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'LGA', dep_time: DateTime.new(2022,3,15,8,30), arr_airport: 'MCO', arr_time: DateTime.new(2022,3,15,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip3.id)
 flight1 = Flight.create(leg: 'outbound', airline: 'Delta Airlines', flight_no: 'DL3326', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,10,8,50), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,10,11,55), seat: '31A', confirmation: '34XJ8D', notes: 'One-Way, no internet on board', trip_id: trip3.id)
 flight2 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,11,8,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,11,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip2.id)
-flight4 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,2,4,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,2,7,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip1.id)
+flight4 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,3,4,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,2,7,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip1.id)
 
 
 puts "Seeding complete!"

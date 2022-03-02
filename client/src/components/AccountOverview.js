@@ -25,7 +25,10 @@ function AccountOverview({ trips, projects }) {
         return distancea - distanceb;
     })
     if (tripsWithFlights.length > 0) {
-        upcomingFlights = tripsWithFlights.filter(trip => ((Date.parse(trip.flights[0].dep_time) - today)/ (60 * 60 * 1000)) <= 24)
+        upcomingFlights = tripsWithFlights.filter(trip => {
+            let differenceMs = (Date.parse(trip.flights[0].dep_time) - today) / (60 * 60 * 1000)
+            return differenceMs <= 24 && differenceMs > 0
+        })
     }
 
     const formatDate = (dateString) => {
@@ -111,7 +114,7 @@ function AccountOverview({ trips, projects }) {
         <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }}>
                 <div id="dashboard-header-content">
-                    <p>March 11th, 2022 11:19 AM. Welcome, User.</p>
+                    <p>{formatDate(today)}. Welcome, User.</p>
                 </div>
             </Header>
             <Content style={{ margin: '16px 16px' }}>
