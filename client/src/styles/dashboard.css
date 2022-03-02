@@ -1,5 +1,8 @@
 @import '~antd/dist/antd.css';
 
+#dashboard-header-content {
+    background-color: #f0f2f5;
+}
 
 #components-layout-demo-side .logo {
   height: 32px;

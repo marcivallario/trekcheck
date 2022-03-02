@@ -15,13 +15,75 @@ import {
   HomeOutlined,
   CheckOutlined
 } from '@ant-design/icons';
+import { useState } from 'react';
 // import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo_white.png'
 import "../styles/dashboard.css"
 
-function Dashboard({ projects }) {
+function Dashboard({ projects, trips }) {
     const { Header, Content, Footer, Sider } = Layout;
     const { SubMenu } = Menu;
+    
+    let upcomingFlights = [];
+    const today = new Date();
+    console.log(today);
+    let tripsWithFlights = trips.filter(trip => trip.flights.length > 0)
+    tripsWithFlights.forEach(trip => {
+        trip.flights.sort((a,b) => {
+            const distancea = Math.abs(today - Date.parse(a.dep_time));
+            const distanceb = Math.abs(today - Date.parse(b.dep_time));
+            return distancea - distanceb;
+        })
+    })
+    tripsWithFlights.sort((a,b) => {
+        const distancea = Math.abs(today - Date.parse(a.flights[0].dep_time));
+        const distanceb = Math.abs(today - Date.parse(b.flights[0].dep_time));
+        return distancea - distanceb;
+    })
+    if (tripsWithFlights.length > 0) {
+        upcomingFlights = tripsWithFlights.filter(trip => ((Date.parse(trip.flights[0].dep_time) - today)/ (60 * 60 * 1000)) <= 24)
+    }
+
+    const formatDate = (dateString) => {
+        console.log(dateString)
+        const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+        return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
+
+    // let test;
+    // if (tripsWithFlights.length > 0) {
+    //     test = (today - Date.parse(tripsWithFlights[0].flights[0].dep_time))/ (60 * 60 * 1000);
+    // }
+
+    // test = tripsWithFlights.filter((today - Date.parse(tripsWithFlights[0].flights[0].dep_time))/ (60 * 60 * 1000))
+  
+
+    console.log('Trips with Flights (sorted in order): ', tripsWithFlights)
+    console.log('Upcoming Trips: ', upcomingFlights)
+
+//     arr.sort(function(a, b) {
+//     var distancea = Math.abs(diffdate - a);
+//     var distanceb = Math.abs(diffdate - b);
+//     return distancea - distanceb; // sort a before b when the distance is smaller
+// });
+
+    // const then = new Date('2022-01-24T09:30:20');
+    // const now = new Date();
+
+    // const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+
+    // // 👇️ convert ms to hours                  min  sec   ms
+    // const hoursBetweenDates = msBetweenDates / (60 * 60 * 1000);
+
+    // console.log(hoursBetweenDates);
+
+    // if (hoursBetweenDates < 24) {
+    // console.log('date is within 24 hours');
+    // } else {
+    // console.log('date is NOT within 24 hours');
+    // }
+
+
 
     const columns = [
         {
@@ -51,29 +113,15 @@ function Dashboard({ projects }) {
         },
     ];
 
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            project: 3,
-            dates: 'March 12 - 14, 2022',
-            flight: <CheckOutlined />
-        },
-       {
-            key: '2',
-            name: 'Jane Doe',
-            project: 2,
-            dates: 'March 11 - 13, 2022',
-            flight: {},
-        },
-        {
-            key: '3',
-            name: 'Jack Smith',
-            project: 3,
-            dates: 'March 11 - 14, 2022',
-            flight: <CheckOutlined />
-        },
-    ];
+    const data = trips.map((trip, index) => {
+        return {
+            key: (index +1),
+            name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
+            project: `#${trip.project.job_no}`,
+            dates: `${trip.depart} - ${trip.return}`,
+            flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
+        }
+    })
 
    
     const project_columns = [
@@ -154,33 +202,19 @@ function Dashboard({ projects }) {
                     <div id="home-small-card-row">
                         <Card className="small-dash-card" title="Flights Within 24 Hours" style={{ width: 300 }}>
                             <div id="twentyfour-grid">
-                                <div className="twentyfour-item">
-                                    <Card>
-                                        <p>John Brown</p>
-                                        <p>American Airlines</p>
-                                        <p>Flight #DL443</p>
-                                        <p>Departs at 4:43am</p>
-                                        <p>Conf #: 43JKD4</p>
-                                    </Card>
-                                </div>
-                                <div className="twentyfour-item">
-                                    <Card>
-                                        <p>John Brown</p>
-                                        <p>American Airlines</p>
-                                        <p>Flight #DL443</p>
-                                        <p>Departs at 4:43am</p>
-                                        <p>Conf #: 43JKD4</p>
-                                    </Card>
-                                </div>
-                                <div className="twentyfour-item">
-                                    <Card>
-                                        <p>John Brown</p>
-                                        <p>American Airlines</p>
-                                        <p>Flight #DL443</p>
-                                        <p>Departs at 4:43am</p>
-                                        <p>Conf #: 43JKD4</p>
-                                    </Card>
-                                </div>
+                                {upcomingFlights.map(trip => {
+                                    return (
+                                        <div className="twentyfour-item" key={trip.id}>
+                                            <Card>
+                                                <p>{trip.passenger.legal_first_name} {trip.passenger.legal_last_name}</p>
+                                                <p>{trip.flights[0].airline}</p>
+                                                <p>Flight #{trip.flights[0].flight_no}</p>
+                                                <p>Departs at {formatDate(trip.flights[0].dep_time)}</p>
+                                                <p>Conf #: {trip.flights[0].confirmation}</p>
+                                            </Card>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </Card>
                         <Card className="small-dash-card" title="Projects" extra={<a href="#">View All</a>} style={{ width: 300 }}>

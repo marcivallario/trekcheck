@@ -21,13 +21,23 @@ function App() {
       }
     })}, [])
 
-    useEffect(() => {
-     if (user.id) {
-      fetch('/projects')
-       .then(res => res.json())
-       .then(projects => setProjects(projects))
-      }
-    }, [user])
+  useEffect(() => {
+    if (user.id) {
+    fetch('/projects')
+      .then(res => res.json())
+      .then(projects => setProjects(projects))
+
+    fetch('/passengers')
+      .then(res => res.json())
+      .then(passengers => setPassengers(passengers))
+
+    fetch('/trips')
+      .then(res => res.json())
+      .then(trips => setTrips(trips))
+    }
+  }, [user])
+
+  console.log('Trips: ', trips)
 
   return (
     <div className="App">
@@ -41,7 +51,7 @@ function App() {
           {(!user) ? <Login setUser={setUser} /> : <div></div>}
         </Route>
         <Route exact path="/">
-          {(!user) ? <> <Header /> <Home/> </>: <Dashboard projects={projects}/>}
+          {(!user) ? <> <Header /> <Home/> </>: <Dashboard projects={projects} trips={trips} />}
         </Route>
       </Switch>
     </div>

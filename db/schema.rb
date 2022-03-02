@@ -10,16 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_01_193648) do
+ActiveRecord::Schema.define(version: 2022_03_01_232816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accommodations", force: :cascade do |t|
+    t.datetime "checkin"
+    t.datetime "checkout"
+    t.string "name"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.integer "zip"
+    t.string "country"
+    t.string "confirmation"
+    t.string "phone"
+    t.text "notes"
+    t.integer "trip_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "ffnumbers", force: :cascade do |t|
     t.string "airline"
     t.string "number"
     t.string "string"
     t.integer "passenger_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.string "leg"
+    t.string "airline"
+    t.string "flight_no"
+    t.string "dep_airport"
+    t.datetime "dep_time"
+    t.string "arr_airport"
+    t.datetime "arr_time"
+    t.string "seat"
+    t.string "confirmation"
+    t.text "notes"
+    t.integer "trip_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -31,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_03_01_193648) do
     t.string "nickname"
     t.string "position"
     t.string "department"
-    t.integer "cell"
+    t.string "cell"
     t.string "email"
     t.string "dob"
     t.string "country_of_residence"
@@ -53,6 +87,17 @@ ActiveRecord::Schema.define(version: 2022_03_01_193648) do
     t.string "client"
     t.boolean "active"
     t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transportations", force: :cascade do |t|
+    t.string "direction"
+    t.datetime "date"
+    t.string "method"
+    t.string "confirmation"
+    t.text "notes"
+    t.integer "trip_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

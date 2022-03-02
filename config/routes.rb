@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :trips
+  resources :accommodations
+  resources :transportations
+  resources :flights
+  resources :trips, only: [:index]
   resources :ffnumbers
-  resources :passengers
+  resources :passengers, only: [:index]
   resources :projects, only: [:index]
   get '/auth', to: 'users#show'
   post '/login', to: 'sessions#create'
