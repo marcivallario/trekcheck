@@ -15,18 +15,25 @@ import {
   HomeOutlined,
   CheckOutlined
 } from '@ant-design/icons';
-import { useState } from 'react';
-// import { NavLink } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../assets/logo_white.png'
 import "../styles/dashboard.css"
 
-function Dashboard({ projects, trips }) {
+function Dashboard({ projects, trips, setUser }) {
     const { Header, Content, Footer, Sider } = Layout;
     const { SubMenu } = Menu;
+
+    let history = useHistory();
+    function handleLogout() {
+        fetch('/logout', {
+            method: 'DELETE'
+        })
+        .then(setUser(''))
+        .then(history.push('/'))
+    }
     
     let upcomingFlights = [];
     const today = new Date();
-    console.log(today);
     let tripsWithFlights = trips.filter(trip => trip.flights.length > 0)
     tripsWithFlights.forEach(trip => {
         trip.flights.sort((a,b) => {
@@ -45,45 +52,9 @@ function Dashboard({ projects, trips }) {
     }
 
     const formatDate = (dateString) => {
-        console.log(dateString)
         const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
         return new Date(dateString).toLocaleTimeString(undefined, options)
     }
-
-    // let test;
-    // if (tripsWithFlights.length > 0) {
-    //     test = (today - Date.parse(tripsWithFlights[0].flights[0].dep_time))/ (60 * 60 * 1000);
-    // }
-
-    // test = tripsWithFlights.filter((today - Date.parse(tripsWithFlights[0].flights[0].dep_time))/ (60 * 60 * 1000))
-  
-
-    console.log('Trips with Flights (sorted in order): ', tripsWithFlights)
-    console.log('Upcoming Trips: ', upcomingFlights)
-
-//     arr.sort(function(a, b) {
-//     var distancea = Math.abs(diffdate - a);
-//     var distanceb = Math.abs(diffdate - b);
-//     return distancea - distanceb; // sort a before b when the distance is smaller
-// });
-
-    // const then = new Date('2022-01-24T09:30:20');
-    // const now = new Date();
-
-    // const msBetweenDates = Math.abs(then.getTime() - now.getTime());
-
-    // // 👇️ convert ms to hours                  min  sec   ms
-    // const hoursBetweenDates = msBetweenDates / (60 * 60 * 1000);
-
-    // console.log(hoursBetweenDates);
-
-    // if (hoursBetweenDates < 24) {
-    // console.log('date is within 24 hours');
-    // } else {
-    // console.log('date is NOT within 24 hours');
-    // }
-
-
 
     const columns = [
         {
@@ -109,7 +80,7 @@ function Dashboard({ projects, trips }) {
         {
             title: 'View',
             key: 'view',
-            render: () => <a>View</a>
+            dataIndex: 'view'
         },
     ];
 
@@ -120,6 +91,7 @@ function Dashboard({ projects, trips }) {
             project: `#${trip.project.job_no}`,
             dates: `${trip.depart} - ${trip.return}`,
             flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
+            view: <Link to={`/trips/${trip.id}`}>View</Link>
         }
     })
 
@@ -167,27 +139,27 @@ function Dashboard({ projects, trips }) {
                 </div>
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="1" icon={<HomeOutlined />}>
-                        Dashboard
+                        <Link to='/' exact>Dashboard</Link>
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<UserOutlined />} title="Passengers">
-                        <Menu.Item key="2">Add Passenger</Menu.Item>
-                        <Menu.Item key="3">View Profiles</Menu.Item>
+                        <Menu.Item key="2"><Link to='/passengers/add'>Add Passenger</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to='/passengers/' exact>View Profiles</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub2" icon={<IdcardOutlined />} title="Trips">
-                        <Menu.Item key="4">Add Trip</Menu.Item>
-                        <Menu.Item key="5">View Trips</Menu.Item>
+                        <Menu.Item key="4"><Link to='/trips/add'>Add Trip</Link></Menu.Item>
+                        <Menu.Item key="5"><Link to='/trips'>View Trips</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub3" icon={<FolderOpenOutlined />} title="Projects">
-                        <Menu.Item key="6">Add Project</Menu.Item>
-                        <Menu.Item key="7">View Projects</Menu.Item>
+                        <Menu.Item key="6"><Link to='/projects/add'>Add Project</Link></Menu.Item>
+                        <Menu.Item key="7"><Link to='/projects'>View Projects</Link></Menu.Item>
                     </SubMenu>
                     <Menu.Item key="8" icon={<DesktopOutlined />}>
-                    Flight Aware
+                        <a href="https://flightaware.com/" target='_blank'>Flight Aware</a>
                     </Menu.Item>
                     <Menu.Item key="9" icon={<GlobalOutlined />}>
-                        US Travel Alerts
+                        <a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html/" target='_blank'>US Travel Alerts</a>
                     </Menu.Item>
-                    <Menu.Item key="10" icon={<LogoutOutlined />}>
+                    <Menu.Item key="10" icon={<LogoutOutlined />} onClick={handleLogout}>
                     Logout
                     </Menu.Item>
                 </Menu>
@@ -217,7 +189,7 @@ function Dashboard({ projects, trips }) {
                                 })}
                             </div>
                         </Card>
-                        <Card className="small-dash-card" title="Projects" extra={<a href="#">View All</a>} style={{ width: 300 }}>
+                        <Card className="small-dash-card" title="Projects" extra={<Link to='/projects'>View All</Link>} style={{ width: 300 }}>
                             <Table
                                 columns={project_columns}
                                 dataSource={project_data}
@@ -227,7 +199,7 @@ function Dashboard({ projects, trips }) {
                         </Card>
                     </div>
                     <div id="upcoming-travel" >
-                        <Card title="Upcoming Travel" extra={<a href="#">View All</a>} style={{ minHeight: 360 }}>
+                        <Card title="Upcoming Travel" extra={<Link to='/trips'>View All</Link>} style={{ minHeight: 360 }}>
                             <Table 
                                 columns={columns} 
                                 dataSource={data} 

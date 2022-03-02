@@ -2,7 +2,6 @@ import { KeyOutlined, FolderOpenOutlined, ClockCircleOutlined } from '@ant-desig
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import '../styles/home.css'
 import { Carousel } from 'react-responsive-carousel';
-import { NavLink } from "react-router-dom";
 
 
 function Home() {
