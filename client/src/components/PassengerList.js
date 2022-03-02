@@ -1,12 +1,17 @@
-import { Layout, Table} from 'antd';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Layout, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import '../styles/passengerlist.css';
 
-function PassengerList({ user, passengers }) {
+function PassengerList({ user, passengers, onDelete }) {
     const { Header, Footer, Content } = Layout;
-    console.log('Passengers: ', passengers)
-    console.log('User:', user)
+
+    function handleDelete(e) {
+        let passengerId = e.target.getAttribute("info");
+        fetch(`/passengers/${passengerId}`, {
+            method: 'DELETE'
+            })
+        .then(onDelete(passengerId));
+    }
    
     const columns = [
         {
@@ -49,7 +54,7 @@ function PassengerList({ user, passengers }) {
             department: passenger.department,
             cell: passenger.cell,
             email: passenger.email,
-            view: <><Link to={`/passengers/${passenger.id}`}>View</Link><DeleteIcon /></>
+            view: <><Link to={`/passengers/${passenger.id}`}>View</Link><p info={passenger.id} onClick={handleDelete}>Delete</p></>
         }
     })
 

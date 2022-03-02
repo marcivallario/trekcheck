@@ -58,6 +58,10 @@ function Dashboard({ setUser, user }) {
         history.push('/passengers')
     }
 
+    function onDeletePassenger(passengerIdToDelete) {
+        setPassengers(passengers.filter(passenger => passenger.id !== passengerIdToDelete))
+    }
+
     return (
       <div id="dashboard">
         <Layout style={{ minHeight: '100vh' }}>
@@ -98,7 +102,7 @@ function Dashboard({ setUser, user }) {
                         <PassengerAdd user={user} onAdd={onAddPassenger}/>
                     </Route>
                     <Route exact path='/passengers'>
-                        <PassengerList user={user} passengers={passengers}/>
+                        <PassengerList user={user} passengers={passengers} onDelete={onDeletePassenger}/>
                     </Route>
                     <Route path='/trips/add'>
                         <TripAdd />

@@ -17,11 +17,11 @@ class PassengersController < ApplicationController
         render json: new_passenger, status: :created
     end
 
-    # def destroy
-    #     passenger = Passenger.find_by!(id: params[:id])
-    #     passenger.destroy
-    #     head :no_content
-    # end
+    def destroy
+        passenger = Passenger.find_by!(id: params[:id])
+        passenger.destroy
+        head :no_content
+    end
 
     private 
 
