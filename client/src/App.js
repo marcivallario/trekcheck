@@ -3,15 +3,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
-import PassengerList from './components/PassengerList';
-import PassengerAdd from './components/PassengerAdd';
-import PassengerView from './components/PassengerView';
-import TripList from './components/TripList';
-import TripView from './components/TripView';
-import TripAdd from './components/TripAdd';
-import ProjectList from './components/ProjectList';
-import ProjectView from './components/ProjectView';
-import ProjectAdd from './components/ProjectAdd';
 import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import './styles/app.css'
@@ -67,35 +58,8 @@ function App() {
     return (
       <div className="App">
         <Switch>
-          <Route path='/passengers/add'>
-            <PassengerAdd />
-          </Route>
-           <Route exact path='/passengers/:passengerId'>
-            <PassengerView />
-          </Route>
-          <Route path='/passengers'>
-            <PassengerList passengers={passengers}/>
-          </Route>
-          <Route path='/trips/add'>
-            <TripAdd />
-          </Route>
-          <Route exact path='/trips/:tripId'>
-            <TripView />
-          </Route>
-          <Route path='/trips'>
-            <TripList />
-          </Route>
-          <Route path='/projects/add'>
-            <ProjectAdd />
-          </Route>
-          <Route exact path='/projects/:projectId'>
-            <ProjectView />
-          </Route>
-          <Route path='/projects'>
-            <ProjectList />
-          </Route>
-          <Route exact path="/">
-            <Dashboard projects={projects} trips={trips} setUser={setUser}/>
+          <Route path="/">
+            <Dashboard projects={projects} trips={trips} setUser={setUser} passengers={passengers}/>
           </Route>
         </Switch>
       </div>
