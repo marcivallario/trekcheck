@@ -16,12 +16,33 @@ import {
   HomeOutlined
 } from '@ant-design/icons';
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import logo from '../assets/logo_white.png'
 import "../styles/dashboard.css"
 
-function Dashboard({ projects, trips, setUser, passengers }) {
+function Dashboard({ setUser, user }) {
+    const [ trips, setTrips ] = useState([])
+    const [ projects, setProjects ] = useState([])
+    const [ passengers, setPassengers ] = useState([])
+    
     const { Content, Sider } = Layout;
     const { SubMenu } = Menu;
+
+    useEffect(() => {
+        if (user.id) {
+        fetch('/projects')
+        .then(res => res.json())
+        .then(projects => setProjects(projects))
+
+        fetch('/passengers')
+        .then(res => res.json())
+        .then(passengers => setPassengers(passengers))
+
+        fetch('/trips')
+        .then(res => res.json())
+        .then(trips => setTrips(trips))
+        }
+    }, [user])
 
     let history = useHistory();
     function handleLogout() {
@@ -30,6 +51,11 @@ function Dashboard({ projects, trips, setUser, passengers }) {
         })
         .then(setUser(''))
         .then(history.push('/'))
+    }
+
+    function onAddPassenger(newPassenger) {
+        setPassengers([...passengers, newPassenger])
+        history.push('/passengers')
     }
 
     return (
@@ -69,7 +95,7 @@ function Dashboard({ projects, trips, setUser, passengers }) {
             <Content>
                 <Switch>
                     <Route path='/passengers/add'>
-                        <PassengerAdd passengers={passengers}/>
+                        <PassengerAdd user={user} onAdd={onAddPassenger}/>
                     </Route>
                     <Route exact path='/passengers'>
                         <PassengerList passengers={passengers}/>
@@ -87,7 +113,7 @@ function Dashboard({ projects, trips, setUser, passengers }) {
                         <ProjectList />
                     </Route>
                     <Route exact path='/'>
-                        <AccountOverview trips={trips} projects={projects}/>
+                        <AccountOverview user={user} trips={trips} projects={projects}/>
                     </Route>
                 </Switch>
             </Content>

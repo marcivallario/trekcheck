@@ -4,10 +4,10 @@ import {
     Table,
     Switch as Switching
 } from 'antd';
-import { CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-function AccountOverview({ trips, projects }) {
+function AccountOverview({ trips, projects, user }) {
     const { Header, Footer, Content } = Layout;
     let upcomingFlights = [];
     const today = new Date();
@@ -114,7 +114,7 @@ function AccountOverview({ trips, projects }) {
         <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }}>
                 <div id="dashboard-header-content">
-                    <p>{formatDate(today)}. Welcome, User.</p>
+                    <p>{formatDate(today)}. Welcome, {user.first_name} {user.last_name}.</p>
                 </div>
             </Header>
             <Content style={{ margin: '16px 16px' }}>

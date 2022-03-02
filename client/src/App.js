@@ -8,9 +8,6 @@ import { useState, useEffect } from 'react';
 import './styles/app.css'
 
 function App() {
-  const [ trips, setTrips ] = useState([])
-  const [ projects, setProjects ] = useState([])
-  const [ passengers, setPassengers ] = useState([])
   const [ user, setUser ] = useState('')
 
   useEffect(() => {
@@ -20,22 +17,6 @@ function App() {
         res.json().then(user => setUser(user))
       }
     })}, [])
-
-  useEffect(() => {
-    if (user.id) {
-    fetch('/projects')
-      .then(res => res.json())
-      .then(projects => setProjects(projects))
-
-    fetch('/passengers')
-      .then(res => res.json())
-      .then(passengers => setPassengers(passengers))
-
-    fetch('/trips')
-      .then(res => res.json())
-      .then(trips => setTrips(trips))
-    }
-  }, [user])
 
   if (!user) {
     return (
@@ -59,7 +40,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/">
-            <Dashboard projects={projects} trips={trips} setUser={setUser} passengers={passengers}/>
+            <Dashboard setUser={setUser} user={user}/>
           </Route>
         </Switch>
       </div>
