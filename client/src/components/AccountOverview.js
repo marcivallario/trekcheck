@@ -9,27 +9,32 @@ import { Link } from 'react-router-dom';
 
 function AccountOverview({ trips, projects, user }) {
     const { Header, Footer, Content } = Layout;
+
     let upcomingFlights = [];
     const today = new Date();
-    let tripsWithFlights = trips.filter(trip => trip.flights.length > 0)
-    tripsWithFlights.forEach(trip => {
-        trip.flights.sort((a,b) => {
-            const distancea = Math.abs(today - Date.parse(a.dep_time));
-            const distanceb = Math.abs(today - Date.parse(b.dep_time));
+    if (trips.length > 0) {
+        let tripsWithFlights = trips.filter(trip => trip.flights.length > 0)
+        tripsWithFlights.forEach(trip => {
+            trip.flights.sort((a,b) => {
+                const distancea = Math.abs(today - Date.parse(a.dep_time));
+                const distanceb = Math.abs(today - Date.parse(b.dep_time));
+                return distancea - distanceb;
+            })
+        })
+        tripsWithFlights.sort((a,b) => {
+            const distancea = Math.abs(today - Date.parse(a.flights[0].dep_time));
+            const distanceb = Math.abs(today - Date.parse(b.flights[0].dep_time));
             return distancea - distanceb;
         })
-    })
-    tripsWithFlights.sort((a,b) => {
-        const distancea = Math.abs(today - Date.parse(a.flights[0].dep_time));
-        const distanceb = Math.abs(today - Date.parse(b.flights[0].dep_time));
-        return distancea - distanceb;
-    })
-    if (tripsWithFlights.length > 0) {
-        upcomingFlights = tripsWithFlights.filter(trip => {
-            let differenceMs = (Date.parse(trip.flights[0].dep_time) - today) / (60 * 60 * 1000)
-            return differenceMs <= 24 && differenceMs > 0
-        })
+        if (tripsWithFlights.length > 0) {
+            upcomingFlights = tripsWithFlights.filter(trip => {
+                let differenceMs = (Date.parse(trip.flights[0].dep_time) - today) / (60 * 60 * 1000)
+                return differenceMs <= 24 && differenceMs > 0
+            })
+        }
     }
+  
+    
 
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
@@ -64,16 +69,20 @@ function AccountOverview({ trips, projects, user }) {
         },
     ];
 
-    const data = trips.map((trip, index) => {
-        return {
-            key: (index +1),
-            name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
-            project: `#${trip.project.job_no}`,
-            dates: `${trip.depart} - ${trip.return}`,
-            flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
-            view: <Link to={`/trips/${trip.id}`}>View</Link>
-        }
-    })
+    let data;
+    if (trips.length > 0) {
+        data = trips.map((trip, index) => {
+            return {
+                key: (index +1),
+                name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
+                project: `#${trip.project.job_no}`,
+                dates: `${trip.depart} - ${trip.return}`,
+                flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
+                view: <Link to={`/trips/${trip.id}`}>View</Link>
+            }
+        })
+    } 
+    
 
    
     const project_columns = [
@@ -98,9 +107,11 @@ function AccountOverview({ trips, projects, user }) {
             key: 'name'
         }
     ];
-
-    let activeProjects = projects.filter(project => project.active === true)
-    const project_data = activeProjects.map((project, index) => {
+    
+    let project_data;
+    if (projects.length > 0) {
+        let activeProjects = projects.filter(project => project.active === true)
+        project_data = activeProjects.map((project, index) => {
         return {
             key: (index + 1),
             active: <Switching defaultChecked />,
@@ -109,6 +120,8 @@ function AccountOverview({ trips, projects, user }) {
             name: `"${project.job_name}"`
         }
     })
+    }
+    
 
     return (
         <Layout className="site-layout">

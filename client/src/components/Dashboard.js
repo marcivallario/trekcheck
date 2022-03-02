@@ -42,7 +42,7 @@ function Dashboard({ setUser, user }) {
         .then(res => res.json())
         .then(trips => setTrips(trips))
         }
-    }, [user])
+    }, [])
 
     let history = useHistory();
     function handleLogout() {
@@ -98,7 +98,7 @@ function Dashboard({ setUser, user }) {
                         <PassengerAdd user={user} onAdd={onAddPassenger}/>
                     </Route>
                     <Route exact path='/passengers'>
-                        <PassengerList passengers={passengers}/>
+                        <PassengerList user={user} passengers={passengers}/>
                     </Route>
                     <Route path='/trips/add'>
                         <TripAdd />
