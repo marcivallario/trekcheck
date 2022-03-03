@@ -68,7 +68,13 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
 
     let data;
     if (trips.length > 0) {
-        data = trips.map((trip, index) => {
+        let sortedTrips = trips.sort((a,b) => {
+                const depa = Date.parse(a.depart);
+                const depb = Date.parse(b.depart);
+                return depa - depb;
+            })
+        
+        data = sortedTrips.map((trip, index) => {
             return {
                 key: (index +1),
                 name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
