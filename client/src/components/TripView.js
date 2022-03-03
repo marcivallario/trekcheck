@@ -31,7 +31,7 @@ function TripView({ user }) {
         return (
             flights.map(flight => {
                 return (
-                    <Card title={`Direction: ${flight.leg}`}>
+                    <Card key={flight.id} title={`Direction: ${flight.leg}`}>
                         <p>Flight: {flight.airline} {flight.flight_no}</p>
                         <p>Departs: {flight.dep_airport} @ {formatDate(flight.dep_time)}</p>
                         <p>Arrives: {flight.arr_airport} @ {formatDate(flight.arr_time)}</p>
@@ -65,15 +65,15 @@ function TripView({ user }) {
                     <p>For: {trip.passenger.legal_first_name} {trip.passenger.legal_last_name}</p>
                     <p>Position: {trip.passenger.position}</p>
                     <p>Department: {trip.passenger.department}</p>
-                    <Collapse defaultActiveKey={['1']}>
+                    <Collapse defaultActiveKey={[`${trip.flights.length > 0 ? '1' : <></>}`, `${trip.transportations.length > 0 ? '2' : <></>}`, `${trip.accommodations.length > 0 ? '3' : <></>}`]}>
                         <Panel header="Flights" key="1">
                         {trip.flights? renderFlights(trip.flights) : <p>Click edit to add a flight.</p>}
                         </Panel>
                         <Panel header="Transportation" key="2">
-                        {trip.transportation? renderFlights(trip.transportation) : <p>Click edit to add a flight.</p>}
+                        {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>Click edit to add a method of transportation.</p>}
                         </Panel>
                         <Panel header="Accommodations" key="3">
-                        <p>3</p>
+                        {trip.accommodations.length > 0? renderTransportation(trip.accommodations) : <p>Click edit to add an acommodation.</p>}
                         </Panel>
                     </Collapse>
                     <button onClick={toggleEditForm}>Edit</button>
