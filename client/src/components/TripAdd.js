@@ -68,7 +68,7 @@ const { Header, Footer, Content } = Layout;
                 </div>
             </Header>
             <Content>
-                <h1>Add New Passenger</h1>
+                <h1>Add New Trip</h1>
                 <form id="add-passenger-form" onSubmit={handleSubmit} >
                     <select value={(formData.passenger_id)} name="passenger_id" onChange={handleDropdownChange}>
                         <option value={0} disabled hidden>Choose a Passenger</option>

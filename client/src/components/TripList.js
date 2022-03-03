@@ -48,7 +48,7 @@ function PassengerList({ user, trips, onDelete }) {
             name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
             date: `${trip.depart} — ${trip.return}`,
             job_no: `#${trip.project.job_no}`,
-            itinerary: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
+            itinerary: (trip.itinerary_sent) ? <CheckOutlined /> : <div></div>,
             action: <><Link to={`/trips/${trip.id}`}>View</Link><p info={trip.id} onClick={handleDelete}>Delete</p></>
         }
     })
@@ -66,7 +66,7 @@ function PassengerList({ user, trips, onDelete }) {
                             columns={columns}
                             dataSource={data}
                             size="small"
-                            pagination={{ pageSize: 5, hideOnSinglePage: true }}
+                            pagination={{ pageSize: 25, hideOnSinglePage: true }}
                         />
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
