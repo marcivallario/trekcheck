@@ -48,7 +48,7 @@ function ProjectList({ user, projects, onDelete }) {
             name: project.job_name,
             client: project.client,
             active: (project.active) ? <CheckOutlined /> : <div></div>,
-            action: <><Link to={`/project/${project.id}`}>View</Link><p info={project.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/projects/${project.id}`}>View</Link><p info={project.id} onClick={handleDelete}>Delete</p></>
         }
     })
 
