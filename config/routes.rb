@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :trips, only: [:index, :show, :create, :destroy]
   resources :ffnumbers
   resources :passengers
-  resources :projects, only: [:index, :create, :destroy]
+  resources :projects
   get '/auth', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

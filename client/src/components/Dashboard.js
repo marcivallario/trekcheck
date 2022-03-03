@@ -6,6 +6,7 @@ import TripList from './TripList';
 import TripView from './TripView';
 import ProjectAdd from './ProjectAdd';
 import ProjectList from './ProjectList';
+import ProjectView from './ProjectView';
 import AccountOverview from './AccountOverview';
 import { Layout, Menu } from 'antd';
 import {
@@ -136,7 +137,10 @@ function Dashboard({ setUser, user }) {
                     <Route exact path='/trips'>
                         <TripList user={user} trips={trips} onDelete={onDeleteTrip}/>
                     </Route>
-                    <Route path='/projects/add'>
+                    <Route exact path='/project/:projectId'>
+                        <ProjectView user={user} projects={projects}/>
+                    </Route>
+                    <Route exact path='/projects/add'>
                         <ProjectAdd user={user} onAdd={onAddProject}/>
                     </Route>
                     <Route exact path='/projects'>

@@ -7,11 +7,22 @@ class ProjectsController < ApplicationController
             render json: {error: "User not authorized"}, status: :unauthorized
         end
     end
+    
+    def show
+        project = Project.find(params[:id])
+        render json: project, status: :ok
+    end
 
     def create
         auth_user = auth
         new_project = auth_user.projects.create!(project_params)
         render json: new_project, status: :created
+    end
+
+    def update
+        project = Project.find(params[:id])
+        project.update(project_params)
+        render json: project, status: :ok
     end
 
     def destroy
