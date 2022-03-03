@@ -66,6 +66,7 @@ function PassengerList({ user, passengers, onDelete }) {
                     </div>
                 </Header>
                 <Content>
+                    <h1>Passengers</h1>
                     <Table
                             columns={columns}
                             dataSource={data}
