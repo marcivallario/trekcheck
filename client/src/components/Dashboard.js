@@ -62,6 +62,15 @@ function Dashboard({ setUser, user }) {
         setPassengers(passengers.filter(passenger => passenger.id !== passengerIdToDelete))
     }
 
+    function onAddTrip(newTrip) {
+        setTrips([...trips, newTrip])
+        history.push('/trips')
+    }
+
+    function onDeleteTrip(tripIdToDelete) {
+        setTrips(trips.filter(trip => trip.id !== tripIdToDelete))
+    }
+
     return (
       <div id="dashboard">
         <Layout style={{ minHeight: '100vh' }}>
@@ -105,13 +114,13 @@ function Dashboard({ setUser, user }) {
                         <PassengerList user={user} passengers={passengers} onDelete={onDeletePassenger}/>
                     </Route>
                     <Route path='/trips/add'>
-                        <TripAdd />
+                        <TripAdd user={user} projects={projects} passengers={passengers} onAdd={onAddTrip}/>
                     </Route>
                     <Route exact path='/trips'>
-                        <TripList user={user} trips={trips}/>
+                        <TripList user={user} trips={trips} onDelete={onDeleteTrip}/>
                     </Route>
                     <Route path='/projects/add'>
-                        <ProjectAdd />
+                        <ProjectAdd user={user}/>
                     </Route>
                     <Route exact path='/projects'>
                         <ProjectList />

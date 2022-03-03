@@ -3,10 +3,23 @@ import { Link } from 'react-router-dom';
 import { CheckOutlined,} from '@ant-design/icons';
 import '../styles/passengerlist.css';
 
-function PassengerList({ user, trips }) {
+function PassengerList({ user, trips, onDelete }) {
     const { Header, Footer, Content } = Layout;
+
+    function handleDelete(e) {
+        let tripId = e.target.getAttribute("info");
+        fetch(`/trips/${tripId}`, {
+            method: 'DELETE'
+            })
+        .then(onDelete(tripId));
+    }
    
     const columns = [
+        {
+            title: 'Job #',
+            dataIndex: 'job_no',
+            key: 'job_no',
+        },
         {
             title: 'Name',
             dataIndex: 'name',
@@ -16,16 +29,6 @@ function PassengerList({ user, trips }) {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
-        },
-        {
-            title: 'Department',
-            dataIndex: 'department',
-            key: 'department',
-        },
-        {
-            title: 'Job #',
-            dataIndex: 'job_no',
-            key: 'job_no',
         },
         {
             title: 'Itinerary sent?',
@@ -43,17 +46,12 @@ function PassengerList({ user, trips }) {
         return {
             key: (index),
             name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
-            date: `${trip.depart} - ${trip.return}`,
+            date: `${trip.depart} — ${trip.return}`,
             job_no: `#${trip.project.job_no}`,
             itinerary: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
-            action: <><Link to={`/trips/${trip.id}`}>View</Link><p info={trip.id}>Delete</p></>
-            // cell: passenger.cell,
-            // email: passenger.email,
-            // view: <><Link to={`/passengers/${passenger.id}`}>View</Link><p info={passenger.id}>Delete</p></>
+            action: <><Link to={`/trips/${trip.id}`}>View</Link><p info={trip.id} onClick={handleDelete}>Delete</p></>
         }
     })
-
-    console.log(trips)
 
     return (
          <Layout className="site-layout">

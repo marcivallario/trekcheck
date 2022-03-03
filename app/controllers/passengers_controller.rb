@@ -1,7 +1,4 @@
 class PassengersController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-
     def index 
         current_user = User.find_by(id: session[:user_id])
         if (current_user) 
@@ -21,16 +18,6 @@ class PassengersController < ApplicationController
         passenger = Passenger.find_by!(id: params[:id])
         passenger.destroy
         head :no_content
-    end
-
-    private 
-
-    def render_unprocessable_entity(invalid)
-        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
-    end
-
-    def render_not_found_response
-        render json: { error: "Passenger not found" }, status: :not_found
     end
     
     def passenger_params
