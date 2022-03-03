@@ -40,9 +40,9 @@ function PassengerList({ user, passengers, onDelete }) {
             key: 'email',
         },
         {
-            title: 'View',
-            dataIndex: 'view',
-            key: 'view',
+            title: 'Action',
+            dataIndex: 'action',
+            key: 'action',
         }
     ];
     
@@ -54,7 +54,7 @@ function PassengerList({ user, passengers, onDelete }) {
             department: passenger.department,
             cell: passenger.cell,
             email: passenger.email,
-            view: <><Link to={`/passengers/${passenger.id}`}>View</Link><p info={passenger.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/passengers/${passenger.id}`}>View</Link><p info={passenger.id} onClick={handleDelete}>Delete</p></>
         }
     })
 

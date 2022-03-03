@@ -108,7 +108,7 @@ function Dashboard({ setUser, user }) {
                         <TripAdd />
                     </Route>
                     <Route exact path='/trips'>
-                        <TripList />
+                        <TripList user={user} trips={trips}/>
                     </Route>
                     <Route path='/projects/add'>
                         <ProjectAdd />
