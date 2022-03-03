@@ -83,6 +83,17 @@ function Dashboard({ setUser, user }) {
         setProjects(projects.filter(project => project.id !== projectIdToDelete))
     }
 
+    function onUpdateActive(updatedProject) {
+        const updatedArr = projects.map(project => {
+            if (project.id === updatedProject.id) {
+                return updatedProject;
+            } else {
+                return project;
+            }
+        });
+        setProjects(updatedArr);
+    }
+
     return (
       <div id="dashboard">
         <Layout style={{ minHeight: '100vh' }}>
@@ -147,7 +158,7 @@ function Dashboard({ setUser, user }) {
                         <ProjectList user={user} projects={projects} onDelete={onDeleteProject}/>
                     </Route>
                     <Route exact path='/'>
-                        <AccountOverview user={user} trips={trips} projects={projects}/>
+                        <AccountOverview user={user} trips={trips} projects={projects} onUpdate={onUpdateActive}/>
                     </Route>
                 </Switch>
             </Content>

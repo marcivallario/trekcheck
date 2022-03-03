@@ -1,13 +1,12 @@
 import { 
     Layout, 
     Card, 
-    Table,
-    Switch as Switching
+    Table
 } from 'antd';
 import { CheckOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-function AccountOverview({ trips, projects, user }) {
+function AccountOverview({ trips, projects, user, onUpdate }) {
     const { Header, Footer, Content } = Layout;
 
     let upcomingFlights = [];
@@ -33,10 +32,6 @@ function AccountOverview({ trips, projects, user }) {
             })
         }
     }
-
-    console.log('Trips: ', trips);
-  
-    
 
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
@@ -116,12 +111,27 @@ function AccountOverview({ trips, projects, user }) {
         project_data = activeProjects.map((project, index) => {
         return {
             key: (index + 1),
-            active: <Switching defaultChecked />,
+            active: <input type="checkbox" info={project.id} checked={project.active} onChange={handleActiveChange}/>,
             number: `#${project.job_no}`,
             client: project.client,
             name: `"${project.job_name}"`
         }
     })
+    }
+
+    function handleActiveChange(e) {
+        const projectId = parseInt(e.target.getAttribute("info"));
+        fetch(`/projects/${projectId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                active: e.target.checked
+            }),
+            })
+        .then((r) => r.json())
+        .then(onUpdate);
     }
     
 
