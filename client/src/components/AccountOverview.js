@@ -33,6 +33,8 @@ function AccountOverview({ trips, projects, user }) {
             })
         }
     }
+
+    console.log('Trips: ', trips);
   
     
 
@@ -78,7 +80,7 @@ function AccountOverview({ trips, projects, user }) {
                 project: `#${trip.project.job_no}`,
                 dates: `${trip.depart} - ${trip.return}`,
                 flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
-                view: <Link to={`/trips/${trip.id}`}>View</Link>
+                view: <Link to={`/trip/${trip.id}`}>View</Link>
             }
         })
     } 

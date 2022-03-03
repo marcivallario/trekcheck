@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :accommodations
   resources :transportations
   resources :flights
-  resources :trips, only: [:index, :create, :destroy]
+  resources :trips, only: [:index, :show, :create, :destroy]
   resources :ffnumbers
   resources :passengers
   resources :projects, only: [:index, :create, :destroy]

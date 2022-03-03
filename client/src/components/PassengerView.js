@@ -25,8 +25,6 @@ function PassengerView({ user, passengers }) {
         seat_assignment_pref: ''
     })
     const { Header, Footer, Content } = Layout;
-    console.log('Passenger: ', passenger);
-    console.log('Form Data: ', formData)
 
     useEffect(() => {
         if (user.id && params.passengerId) {
@@ -55,7 +53,7 @@ function PassengerView({ user, passengers }) {
             global_entry:  passenger.global_entry,
             seat_assignment_pref:  passenger.seat_assignment_pref
         })
-    }, [passenger])
+    }, [passenger, user.id])
 
     function toggleEditForm() {
         setToggleEdit(!toggleEdit);

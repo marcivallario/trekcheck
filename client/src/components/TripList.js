@@ -49,7 +49,7 @@ function PassengerList({ user, trips, onDelete }) {
             date: `${trip.depart} — ${trip.return}`,
             job_no: `#${trip.project.job_no}`,
             itinerary: (trip.itinerary_sent) ? <CheckOutlined /> : <div></div>,
-            action: <><Link to={`/trips/${trip.id}`}>View</Link><p info={trip.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/trip/${trip.id}`}>View</Link><p info={trip.id} onClick={handleDelete}>Delete</p></>
         }
     })
 

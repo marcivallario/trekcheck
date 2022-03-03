@@ -3,6 +3,7 @@ import PassengerList from './PassengerList';
 import PassengerView from './PassengerView';
 import TripAdd from './TripAdd';
 import TripList from './TripList';
+import TripView from './TripView';
 import ProjectAdd from './ProjectAdd';
 import ProjectList from './ProjectList';
 import AccountOverview from './AccountOverview';
@@ -126,7 +127,10 @@ function Dashboard({ setUser, user }) {
                     <Route exact path='/passengers'>
                         <PassengerList user={user} passengers={passengers} onDelete={onDeletePassenger}/>
                     </Route>
-                    <Route path='/trips/add'>
+                    <Route exact path='/trip/:tripId'>
+                        <TripView user={user} trips={trips}/>
+                    </Route>
+                    <Route exact path='/trips/add'>
                         <TripAdd user={user} projects={projects} passengers={passengers} onAdd={onAddTrip}/>
                     </Route>
                     <Route exact path='/trips'>

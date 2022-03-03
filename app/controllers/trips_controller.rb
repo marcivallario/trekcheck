@@ -2,10 +2,17 @@ class TripsController < ApplicationController
     def index 
         current_user = User.find_by(id: session[:user_id])
         if (current_user) 
-            render json: current_user.trips, includes: [:passenger, :project]
+            byebug
+            # render json: current_user.trips, includes: [:passenger, :project]
+            render json: current_user.trips
         else 
             render json: {error: "User not authorized"}, status: :unauthorized
         end
+    end
+
+    def show
+        trip = Passenger.find(params[:id])
+        render json: passenger, status: :ok
     end
 
     def create 
