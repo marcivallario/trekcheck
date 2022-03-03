@@ -40,8 +40,6 @@ function ProjectAdd({ user, onAdd }) {
         })
     }
 
-    console.log(formData)
-
     return (
          <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }}>

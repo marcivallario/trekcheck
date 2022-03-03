@@ -1,5 +1,6 @@
 import PassengerAdd from './PassengerAdd';
 import PassengerList from './PassengerList';
+import PassengerView from './PassengerView';
 import TripAdd from './TripAdd';
 import TripList from './TripList';
 import ProjectAdd from './ProjectAdd';
@@ -42,7 +43,7 @@ function Dashboard({ setUser, user }) {
         .then(res => res.json())
         .then(trips => setTrips(trips))
         }
-    }, [])
+    }, [user.id])
 
     let history = useHistory();
     function handleLogout() {
@@ -79,8 +80,6 @@ function Dashboard({ setUser, user }) {
     function onDeleteProject(projectIdToDelete) {
         setProjects(projects.filter(project => project.id !== projectIdToDelete))
     }
-    
-    console.log('Projects: ', projects)
 
     return (
       <div id="dashboard">
@@ -118,7 +117,10 @@ function Dashboard({ setUser, user }) {
             </Sider>
             <Content>
                 <Switch>
-                    <Route path='/passengers/add'>
+                    <Route exact path='/passenger/:passengerId'>
+                        <PassengerView user={user} passengers={passengers}/>
+                    </Route>
+                    <Route exact path='/passengers/add'>
                         <PassengerAdd user={user} onAdd={onAddPassenger}/>
                     </Route>
                     <Route exact path='/passengers'>

@@ -8,10 +8,21 @@ class PassengersController < ApplicationController
         end
     end
 
+    def show
+        passenger = Passenger.find(params[:id])
+        render json: passenger, status: :ok
+    end
+
     def create 
         auth_user = auth
         new_passenger = auth_user.passengers.create!(passenger_params)
         render json: new_passenger, status: :created
+    end
+
+    def update
+        passenger = Passenger.find_by(id: params[:id])
+        passenger.update(passenger_params)
+        render json: passenger, status: :ok
     end
 
     def destroy
