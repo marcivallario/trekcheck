@@ -24,6 +24,8 @@ flight1 = Flight.create(leg: 'outbound', airline: 'Delta Airlines', flight_no: '
 flight2 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,11,8,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,11,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip2.id)
 flight4 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,4,4,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,4,7,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip1.id)
 
-# transpo1 = Transportation.create(direction: 'From home to airport', date: DateTime.new(2022,3,4,4,30), method: 'Enterprise VIP Rent-A-Car', confirmation: '9283437824732', trip_id: trip1.id)
+transpo1 = Transportation.create(direction: 'From home to airport', date: DateTime.new(2022,3,4), trans_mode: 'Enterprise VIP Rent-A-Car', confirmation: '9283437824732', trip_id: trip1.id)
+transpo2 = Transportation.create(direction: 'From airport to accommodations', date: DateTime.new(2022,3,4), trans_mode: 'Rideshare', confirmation: '483290578439', trip_id: trip1.id)
+
 
 puts "Seeding complete!"

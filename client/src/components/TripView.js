@@ -27,11 +27,10 @@ function TripView({ user }) {
     }
 
     function renderFlights(flights) {
-        console.log(flights)
         return (
             flights.map(flight => {
                 return (
-                    <Card key={flight.id} title={`Direction: ${flight.leg}`}>
+                    <Card key={flight.id} title={`Flight: ${flight.leg}`}>
                         <p>Flight: {flight.airline} {flight.flight_no}</p>
                         <p>Departs: {flight.dep_airport} @ {formatDate(flight.dep_time)}</p>
                         <p>Arrives: {flight.arr_airport} @ {formatDate(flight.arr_time)}</p>
@@ -44,8 +43,19 @@ function TripView({ user }) {
         )
     }
 
-    function renderTransportation(transpo) {
-
+    function renderTransportation(transportations) {
+        return (
+            transportations.map(transpo => {
+                return (
+                    <Card key={transpo.id} title={`Transportation: ${transpo.direction}`}>
+                        <p>Date: {formatDate(transpo.date)}</p>
+                        <p>Method: {transpo.trans_mode}</p>
+                        <p>{transpo.confirmation? `Confirmation #: ${transpo.confirmation}` : <></>}</p>
+                        <p>{transpo.notes? `Notes: ${transpo.notes}` : <></>}</p>
+                    </Card>
+                )
+            })
+        )
     }
 
     console.log('Trip: ', trip);
