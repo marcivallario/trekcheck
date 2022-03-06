@@ -94,8 +94,6 @@ function Dashboard({ setUser, user }) {
         setProjects(updatedArr);
     }
 
-    console.log('Trips: ', trips)
-
     return (
       <div id="dashboard">
         <Layout style={{ minHeight: '100vh' }}>

@@ -30,7 +30,7 @@ function TripView({ user }) {
         return (
             flights.map(flight => {
                 return (
-                    <Card key={flight.id} title={`Flight: ${flight.leg}`}>
+                    <Card key={flight.id} title={flight.leg}>
                         <p>Flight: {flight.airline} {flight.flight_no}</p>
                         <p>Departs: {flight.dep_airport} @ {formatDate(flight.dep_time)}</p>
                         <p>Arrives: {flight.arr_airport} @ {formatDate(flight.arr_time)}</p>
@@ -47,7 +47,7 @@ function TripView({ user }) {
         return (
             transportations.map(transpo => {
                 return (
-                    <Card key={transpo.id} title={`Transportation: ${transpo.direction}`}>
+                    <Card key={transpo.id} title={transpo.direction}>
                         <p>Date: {formatDate(transpo.date)}</p>
                         <p>Method: {transpo.trans_mode}</p>
                         <p>{transpo.confirmation? `Confirmation #: ${transpo.confirmation}` : <></>}</p>
@@ -58,7 +58,24 @@ function TripView({ user }) {
         )
     }
 
-    console.log('Trip: ', trip);
+    function renderAccommodation(accommodations) {
+        return (
+            accommodations.map(acc=> {
+                return (
+                    <Card  key={acc.id} title={acc.acc_type}>
+                        <p>{acc.name}</p>
+                        <p>{acc.address_1}</p>
+                        {acc.address_2? <p>{acc.address_2}</p> : <div></div>}
+                        <p>{acc.city}, {acc.state} {acc.zip}</p>
+                        <p></p>
+                        <p>Checkin: {acc.checkin}</p>
+                        <p>Checkout: {acc.checkout}</p>
+                        <p>Confirmation #{acc.confirmation}</p>
+                    </Card>
+                )
+            })
+        )
+    }
     
     if (!toggleEdit && trip.id) {
         return (
@@ -83,7 +100,7 @@ function TripView({ user }) {
                         {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>Click edit to add a method of transportation.</p>}
                         </Panel>
                         <Panel header="Accommodations" key="3">
-                        {trip.accommodations.length > 0? renderTransportation(trip.accommodations) : <p>Click edit to add an acommodation.</p>}
+                        {trip.accommodations.length > 0? renderAccommodation(trip.accommodations) : <p>Click edit to add an acommodation.</p>}
                         </Panel>
                     </Collapse>
                     <button onClick={toggleEditForm}>Edit</button>
