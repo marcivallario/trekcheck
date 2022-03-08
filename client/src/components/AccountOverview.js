@@ -5,6 +5,7 @@ import {
 } from 'antd';
 import { CheckOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import '../styles/accountoverview.css'
 
 function AccountOverview({ trips, projects, user, onUpdate }) {
     const { Header, Footer, Content } = Layout;
@@ -145,7 +146,8 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
         <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }}>
                 <div id="dashboard-header-content">
-                    <p>{formatDate(today)}. Welcome, {user.first_name} {user.last_name}.</p>
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
                 </div>
             </Header>
             <Content style={{ margin: '16px 16px' }}>
@@ -155,8 +157,7 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
                             {upcomingFlights.map(trip => {
                                 return (
                                     <div className="twentyfour-item" key={trip.id}>
-                                        <Card>
-                                            <p>{trip.passenger.legal_first_name} {trip.passenger.legal_last_name}</p>
+                                        <Card title={`${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`}>
                                             <p>{trip.flights[0].airline}</p>
                                             <p>Flight #{trip.flights[0].flight_no}</p>
                                             <p>Departs at {formatDate(trip.flights[0].dep_time)}</p>

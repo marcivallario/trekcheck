@@ -27,3 +27,11 @@ h1, h2, h3, h4, h5, h6 {
 body {
   color: #3e4e57
 }
+
+#dashboard-header-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-style: italic;
+  color: #9499a4;
+}

@@ -49,32 +49,6 @@
     align-items: center;
 }
 
-#twentyfour-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px
-}
-
-#twentyfour-grid > .twentyfour-item::before {
-    content: "";
-    padding-bottom: 100%;
-    display: block;
-}
-
-.twentyfour-item {
-    background: yellow;
-    padding: 1rem;
-}
-
-#twentyfour-grid > .twentyfour-item {
-  display: grid;
-}
-
-#twentyfour-grid > .twentyfour-item::before,
-#twentyfour-grid > .twentyfour-item > .ant-card.ant-card-bordered {
-  grid-area: 1 / 1 / 2 / 2;
-}
-
 .ant-layout.site-layout {
     min-height: 100vh;
 }

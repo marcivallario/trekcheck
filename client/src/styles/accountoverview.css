@@ -1,0 +1,24 @@
+#twentyfour-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px
+}
+
+#twentyfour-grid > .twentyfour-item::before {
+    content: "";
+    padding-bottom: 100%;
+    display: block;
+}
+
+.twentyfour-item .ant-card.ant-card-bordered {
+    box-shadow: 5px 10px 20px #c3c2ca ;
+}
+
+#twentyfour-grid > .twentyfour-item {
+  display: grid;
+}
+
+#twentyfour-grid > .twentyfour-item::before,
+#twentyfour-grid > .twentyfour-item > .ant-card.ant-card-bordered {
+  grid-area: 1 / 1 / 2 / 2;
+}
