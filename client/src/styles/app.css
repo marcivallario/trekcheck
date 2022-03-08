@@ -18,3 +18,12 @@ picture {
 html {
     scroll-behavior: smooth;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #3e4e57
+}
+
+body {
+  color: #3e4e57
+}

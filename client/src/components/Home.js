@@ -18,34 +18,31 @@ function Home() {
                 <div id="about-container">
                     <div id="about-text">
                         <h2>Project-driven travel, done right.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus proin nibh nisl condimentum id venenatis. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Netus et malesuada fames ac. Non arcu risus quis varius quam quisque id diam vel. Pretium nibh ipsum consequat nisl vel pretium. In hac habitasse platea dictumst quisque sagittis. Sed lectus vestibulum mattis ullamcorper velit. Turpis cursus in hac habitasse platea dictumst quisque sagittis. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget. Viverra justo nec ultrices dui.</p>
+                        <p>When it comes to your projects, you want it done right the first time. You're balancing many plates, and you're looking for a stabilizer. TrekCheck makes tracking employee travel easy. Add projects, passengers, and trips to your dashbard to create harmony in in a seemless interface. No more messy spreadsheets and tedious data plugging.</p>
                     </div>
                     <div id="icons-container">
-                        <div id="secure">
+                        <div className="icon-content">
                             <div className="icon-img-container">
-                                <KeyOutlined />
+                                <KeyOutlined style={{ fontSize: '80px', color: '#9499a4' }}/>
                             </div>
                             <div className="icon-content">
-                                <h5>Secure</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Secure</p>
                             </div>
                         </div>
-                        <div id="organized">
+                        <div className="icon-content">
                             <div className="icon-img-container">
-                                <FolderOpenOutlined />
+                                <FolderOpenOutlined style={{ fontSize: '80px', color: '#9499a4' }}/>
                             </div>
                             <div className="icon-content">
-                                <h5>Organized</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Organized</p>
                             </div>
                         </div>
-                        <div id="fast">
+                        <div className="icon-content">
                             <div className="icon-img-container">
-                                <ClockCircleOutlined />
+                                <ClockCircleOutlined style={{ fontSize: '80px', color: '#9499a4' }}/>
                             </div>
                             <div className="icon-content">
-                                <h5>Fast</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Fast</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +62,7 @@ function Home() {
                             <h3>Gabrielle Holland</h3>
                             <h4>Head of Logistics, Altourism Travel</h4>
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus proin nibh nisl condimentum id venenatis. 
+                            TrekCheck took all the headache away from roganizing travel for my teams. I know where everyone is suppose to be and when. I can't recommend them enough! 
                             </p>
                         </div>
                     </div>
@@ -75,7 +72,7 @@ function Home() {
                             <h3>Daniel Keystone</h3>
                             <h4>Travel Agent, Miriam Experiences</h4>
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus proin nibh nisl condimentum id venenatis. 
+                            When I first started out in travel, I had massive spreadsheets and an overworked brain trying to keep up with it all. Now, I just track it all from the dashboard. Love it! 
                             </p>
                         </div>
                     </div>
@@ -85,7 +82,7 @@ function Home() {
                             <h3>Tim Sorel</h3>
                             <h4>Production Coordinator, NewFound Film</h4>
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus proin nibh nisl condimentum id venenatis. 
+                            Tracking travel for film gigs has always been a fulltime job on top of my other tasks. Now I've been able to free up brain space so that everything comes together smoothly. Can't live without it!
                             </p>
                         </div>
                     </div>
