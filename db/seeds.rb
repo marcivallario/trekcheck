@@ -27,7 +27,7 @@ flight4 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_n
 transpo1 = Transportation.create(direction: 'From home to airport', date: DateTime.new(2022,3,4), trans_mode: 'Enterprise VIP Rent-A-Car', confirmation: '9283437824732', trip_id: trip1.id)
 transpo2 = Transportation.create(direction: 'From airport to accommodations', date: DateTime.new(2022,3,4), trans_mode: 'Rideshare', confirmation: '483290578439', trip_id: trip1.id)
 
-acc1 = Accommodation.create(checkin: DateTime.new(2022,3,4,10,30), checkout: DateTime.new(2022,3,5,15,30), acc_type: 'Hotel', name: 'Hilton Garden Inn', address_1: '42 Wallaby Way', city: 'Sydney', state: 'FL', zip: 32746, country: 'USA', confirmation: '438920843', phone: 407-404-2878, notes: 'No smoking', trip_id: trip1.id)
+acc1 = Accommodation.create(checkin: DateTime.new(2022,3,4,10,30), checkout: DateTime.new(2022,3,5,15,30), acc_type: 'Hotel', name: 'Hilton Garden Inn', address_1: '42 Wallaby Way', city: 'Sydney', state: 'FL', zip: 32746, country: 'USA', confirmation: '438920843', phone: '407-404-2878', notes: 'No smoking', trip_id: trip1.id)
 
 
 puts "Seeding complete!"

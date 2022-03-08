@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import '../styles/flighteditmodal.css'
 
-function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle, setSelectedFlight, onUpdateTrip, setTrip }) {
+function FlightEditModal({ setTrips, trips, toggleShow, acc, trip, setToggle, setSelectedAcc, onUpdateTrip, setTrip }) {
     const [ formData, setFormData ] = useState({
         trip_id: trip.id,
-        id: flight.id,
-        leg: flight.leg,
-        airline: flight.airline,
-        flight_no: flight.flight_no,
-        dep_airport: flight.dep_airport,
-        dep_time: flight.dep_time,
-        arr_airport: flight.arr_airport,
-        arr_time: flight.arr_time,
-        seat: flight.seat,
-        confirmation: flight.confirmation,
-        notes: flight.notes
+        id: acc.id,
+        checkin: acc.checkin,
+        checkout: acc.checkout,
+        acc_type: acc.acc_type,
+        name: acc.name,
+        address_1: acc.address_1,
+        address_2: acc.address_2,
+        city: acc.city,
+        state: acc.state,
+        zip: acc.zip,
+        confirmation: acc.confirmation,
+        phone: acc.phone,
+        notes: acc.notes
     })   
+
+    console.log(acc)
 
     function handleChange(e) {
         const key = e.target.name;
@@ -24,7 +28,7 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
     }
 
     function handleUpdate() {
-        fetch(`/flights/${flight.id}`, {
+        fetch(`/accommodations/${acc.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -44,17 +48,17 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
         })
     }
 
-    function onUpdateTrip(updatedFlight, tripId) {
+    function onUpdateTrip(updatedAcc, tripId) {
          const updatedArr = trips.map(trip => {
             if (trip.id === tripId) {
-                let updatedFlights = trip.flights.map(flight => {
-                    if (flight.id === updatedFlight.id) {
-                        return updatedFlight
+                let updatedAccs = trip.accommodations.map(accom => {
+                    if (accom.id === updatedAcc.id) {
+                        return updatedAcc
                     } else {
-                        return flight
+                        return accom
                     }
                 })
-                trip.flights = updatedFlights
+                trip.accommodations = updatedAccs
                 setTrip(trip)
                 return trip
             } else {
@@ -73,25 +77,27 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
         <div className="modal">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h4 className="modal-title">Edit Flight</h4>
+                    <h4 className="modal-title">Edit Accommodation</h4>
                 </div>
                 <div className="modal-body">
-                    <input value={formData.leg} name="leg" onChange={handleChange}></input>
-                    <input value={formData.airline} name="airline" onChange={handleChange}></input>
-                    <input value={formData.flight_no} name="flight_no" onChange={handleChange}></input>
-                    <input value={formData.dep_airport} name="dep_airport" onChange={handleChange}></input>
-                    <input value={formData.dep_time} name="dep_time" onChange={handleChange}></input>
-                    <input value={formData.arr_airport} name="arr_airport" onChange={handleChange}></input>
-                    <input value={formData.arr_time} name="arr_time" onChange={handleChange}></input>
-                    <input value={formData.seat} name="seat" onChange={handleChange}></input>
+                    <input value={formData.checkin} name="checkin" onChange={handleChange}></input>
+                    <input value={formData.checkout} name="checkout" onChange={handleChange}></input>
+                    <input value={formData.acc_type} name="acc_type" onChange={handleChange}></input>
+                    <input value={formData.name} name="name" onChange={handleChange}></input>
+                    <input value={formData.address_1} name="address_1" onChange={handleChange}></input>
+                    <input value={formData.address_2} onChange={handleChange}></input>
+                    <input value={formData.city} name="city" onChange={handleChange}></input>
+                    <input value={formData.state} name="state" onChange={handleChange}></input>
+                    <input value={formData.zip} name="zip" onChange={handleChange}></input>
                     <input value={formData.confirmation} name="confirmation" onChange={handleChange}></input>
+                    <input value={formData.phone} name="phone" onChange={handleChange}></input>
                     <input value={formData.notes} name="notes" onChange={handleChange}></input>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="button" onClick={handleUpdate}>Update</button>
                     <button type="button" className="button" onClick={() => {
                         setToggle(false)
-                        setSelectedFlight({})
+                        setSelectedAcc({})
                         }}>Close</button>
                 </div>
             </div>

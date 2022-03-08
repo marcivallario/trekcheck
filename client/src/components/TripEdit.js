@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Layout, Collapse, Card } from 'antd';
 import FlightEditModal from './FlightEditModal';
 import TranspoEditModal from './TranspoEditModal';
+import AccEditModal from './AccEditModal';
 
     const { Panel } = Collapse;
 
@@ -12,10 +13,12 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
         return: '',
         itinerary_sent: false
     })
-    const [ toggleFlightEdit, setToggleFlightEdit ] = useState(false)
+    const [ toggleFlightEdit, setToggleFlightEdit ] = useState(false);
     const [ selectedFlight, setSelectedFlight ] = useState({});
-    const [ toggleTranspoEdit, setToggleTranspoEdit ] = useState(false)
+    const [ toggleTranspoEdit, setToggleTranspoEdit ] = useState(false);
     const [ selectedTranspo, setSelectedTranspo ] = useState({});
+    const [ toggleAccEdit, setToggleAccEdit ] = useState(false);
+    const [ selectedAcc, setSelectedAcc ] = useState({});
 
     useEffect(() => {
         setFormData({
@@ -25,8 +28,6 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
             itinerary_sent: trip.itinerary_sent,
         })
     }, [])
-
-    console.log(trip);
 
     function handleChange(e) {
         const key = e.target.name;
@@ -75,16 +76,35 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
                         <button type="button" onClick={() => {
                             setToggleTranspoEdit(true)
                             setSelectedTranspo(transpo)
-                            }}>Edit Transpo</button>
+                            }}>Edit Transportation</button>
                     </Card>
                 )
             })
         )
     }
 
-    // function renderEditAccommodation() {
-    //     return (<div><p>edit accommodations</p></div>)
-    // }
+    function renderAccommodations(accommodations) {
+        return (
+            accommodations.map(acc=> {
+                return (
+                    <Card  key={acc.id} title={acc.acc_type}>
+                        <p>{acc.name}</p>
+                        <p>{acc.address_1}</p>
+                        {acc.address_2? <p>{acc.address_2}</p> : <div></div>}
+                        <p>{acc.city}, {acc.state} {acc.zip}</p>
+                        <p></p>
+                        <p>Checkin: {formatDate(acc.checkin)}</p>
+                        <p>Checkout: {formatDate(acc.checkout)}</p>
+                        <p>Confirmation #{acc.confirmation}</p>
+                        <button type="button" onClick={() => {
+                            setToggleAccEdit(true)
+                            setSelectedAcc(acc)
+                            }}>Edit Accommodation</button>
+                    </Card>
+                )
+            })
+        )
+    }
 
     function renderFlights(flights) {
         return (
@@ -123,13 +143,15 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
                     {trip.transportations.length > 0? renderTranspo(trip.transportations) : <p>No transportations on this trip!</p>}
                     </Panel>
                     <Panel header="Accommodations" key="3">
-                    {/* {trip.accommodations.length > 0? renderEditAccommodation(trip.accommodations) : <p>Click edit to add an acommodation.</p>} */}
+                    {trip.accommodations.length > 0? renderAccommodations(trip.accommodations) : <p>No accommodations on this trip!</p>}
                     </Panel>
                 </Collapse>
                 <input type="submit" value="Save Changes"/>
                 {!!Object.values(selectedFlight).length && <FlightEditModal toggleShow={toggleFlightEdit} flight={selectedFlight} trip={trip} setToggle={setToggleFlightEdit} setSelectedFlight={setSelectedFlight} onUpdateTrip={onUpdateTrip} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
 
-                {!!Object.values(selectedTranspo).length && <TranspoEditModal toggleShow={toggleTranspoEdit} onUpdateTranspoTrip={onUpdateTranspoTrip} transpo={selectedTranspo} trip={trip} setToggle={setToggleTranspoEdit} setSelectedTranspo={setSelectedTranspo} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
+                {!!Object.values(selectedTranspo).length && <TranspoEditModal toggleShow={toggleTranspoEdit} transpo={selectedTranspo} trip={trip} setToggle={setToggleTranspoEdit} setSelectedTranspo={setSelectedTranspo} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
+
+                {!!Object.values(selectedAcc).length && <AccEditModal toggleShow={toggleAccEdit} acc={selectedAcc} trip={trip} setToggle={setToggleAccEdit} setSelectedAcc={setSelectedAcc} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
             </form>
             
         </div>

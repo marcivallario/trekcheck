@@ -68,9 +68,9 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
                         <p>{acc.address_1}</p>
                         {acc.address_2? <p>{acc.address_2}</p> : <div></div>}
                         <p>{acc.city}, {acc.state} {acc.zip}</p>
-                        <p></p>
-                        <p>Checkin: {acc.checkin}</p>
-                        <p>Checkout: {acc.checkout}</p>
+                        <p>Phone: {acc.phone}</p>
+                        <p>Checkin: {formatDate(acc.checkin)}</p>
+                        <p>Checkout: {formatDate(acc.checkout)}</p>
                         <p>Confirmation #{acc.confirmation}</p>
                     </Card>
                 )

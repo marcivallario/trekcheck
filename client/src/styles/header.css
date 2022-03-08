@@ -18,4 +18,31 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  gap: 20px;
+}
+
+nav a.active {
+  color: #4d626d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+nav a.active:hover {
+  font-style: italic;
+}
+
+nav a.active:active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+nav button {
+  border-radius: 20px;
+  border: none;
+  padding: 3px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: #4d626d;
+  color: #eaeaef;
 }
