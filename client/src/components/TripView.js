@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Layout, Collapse, Card } from 'antd';
 import TripEdit from './TripEdit.js';
+import '../styles/tripview.css'
 
 function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) {
     const params = useParams();
@@ -21,10 +22,16 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
     function toggleEditForm() {
         setToggleEdit(!toggleEdit);
     }
-
+    
+    const today = new Date();
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
         return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
+
+    const formatDateOnly = (dateString) => {
+        let d = new Date(dateString)
+        return (d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear();
     }
 
     function renderFlights(flights) {
@@ -80,33 +87,46 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
 
     
     
+    
     if (!toggleEdit && trip.id) {
         return (
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
-                    </div>
-                </Header>
+                <div id="dashboard-header-content">
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
+                </div>
+            </Header>
                 <Content>
-                    <h1>Trip: {trip.depart} — {trip.return}</h1>
-                    <label htmlFor="itinerary_sent">Itinerary sent: </label>
-                    <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={trip.itinerary_sent} disabled/>
-                    <p>For: {trip.passenger.legal_first_name} {trip.passenger.legal_last_name}</p>
-                    <p>Position: {trip.passenger.position}</p>
-                    <p>Department: {trip.passenger.department}</p>
-                    <Collapse defaultActiveKey={[`${trip.flights.length > 0 ? '1' : <></>}`, `${trip.transportations.length > 0 ? '2' : <></>}`, `${trip.accommodations.length > 0 ? '3' : <></>}`]}>
-                        <Panel header="Flights" key="1">
-                        {trip.flights.length > 0 ? renderFlights(trip.flights) : <p>No flights.</p>}
-                        </Panel>
-                        <Panel header="Transportation" key="2">
-                        {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>No transportations.</p>}
-                        </Panel>
-                        <Panel header="Accommodations" key="3">
-                        {trip.accommodations.length > 0? renderAccommodation(trip.accommodations) : <p>No accommodations.</p>}
-                        </Panel>
-                    </Collapse>
-                    <button onClick={toggleEditForm}>Edit</button>
+                    <div id="trip-view">
+                        <h1>Trip: {formatDateOnly(trip.depart)} — {formatDateOnly(trip.return)}</h1>
+                        <div id="trip-view-details">
+                            <p className="trip-view-label">For:</p>
+                            <p>{trip.passenger.legal_first_name} {trip.passenger.legal_last_name}</p>
+
+                            <p className="trip-view-label">Position:</p>
+                            <p>{trip.passenger.position}</p>
+
+                            <p className="trip-view-label">Department:</p>
+                            <p>{trip.passenger.department}</p>
+
+                            <label className="trip-view-label" htmlFor="itinerary_sent">Itinerary sent: </label>
+                            <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={trip.itinerary_sent} disabled/>
+                        </div>
+
+                        <Collapse defaultActiveKey={[`${trip.flights.length > 0 ? '1' : <></>}`, `${trip.transportations.length > 0 ? '2' : <></>}`, `${trip.accommodations.length > 0 ? '3' : <></>}`]}>
+                            <Panel header="Flights" key="1">
+                            {trip.flights.length > 0 ? renderFlights(trip.flights) : <p>No flights.</p>}
+                            </Panel>
+                            <Panel header="Transportation" key="2">
+                            {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>No transportations.</p>}
+                            </Panel>
+                            <Panel header="Accommodations" key="3">
+                            {trip.accommodations.length > 0? renderAccommodation(trip.accommodations) : <p>No accommodations.</p>}
+                            </Panel>
+                        </Collapse>
+                        <button className="trip-edit" onClick={toggleEditForm}>Edit</button>
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>
