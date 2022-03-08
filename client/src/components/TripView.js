@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Layout, Collapse, Card } from 'antd';
+import TripEdit from './TripEdit.js';
 
-function TripView({ user }) {
+function TripView({ trips, user, onUpdateTrip, setTrips }) {
     const params = useParams();
     const [toggleEdit, setToggleEdit] = useState(false);
     const [ trip, setTrip ] = useState({})
@@ -76,6 +77,8 @@ function TripView({ user }) {
             })
         )
     }
+
+    
     
     if (!toggleEdit && trip.id) {
         return (
@@ -117,7 +120,7 @@ function TripView({ user }) {
                     </div>
                 </Header>
                 <Content>
-                    <h1>Edit Trip</h1>
+                    <TripEdit trip={trip} user={user} formatDate={formatDate} onUpdateTrip={onUpdateTrip} setTrip={setTrip} trips={trips} setTrips={setTrips} setToggleEdit={setToggleEdit} toggleEdit={toggleEdit}/>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>

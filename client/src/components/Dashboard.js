@@ -62,7 +62,8 @@ function Dashboard({ setUser, user }) {
     }
 
     function onDeletePassenger(passengerIdToDelete) {
-        setPassengers(passengers.filter(passenger => passenger.id !== passengerIdToDelete))
+        debugger
+        setPassengers(passengers.filter(passenger => passenger.id !== parseInt(passengerIdToDelete)))
     }
 
     function onAddTrip(newTrip) {
@@ -71,7 +72,7 @@ function Dashboard({ setUser, user }) {
     }
 
     function onDeleteTrip(tripIdToDelete) {
-        setTrips(trips.filter(trip => trip.id !== tripIdToDelete))
+        setTrips(trips.filter(trip => trip.id !== parseInt(tripIdToDelete)))
     }
 
     function onAddProject(newProject) {
@@ -80,7 +81,7 @@ function Dashboard({ setUser, user }) {
     }
 
     function onDeleteProject(projectIdToDelete) {
-        setProjects(projects.filter(project => project.id !== projectIdToDelete))
+        setProjects(projects.filter(project => project.id !== parseInt(projectIdToDelete)))
     }
 
     function onUpdateActive(updatedProject) {
@@ -92,6 +93,25 @@ function Dashboard({ setUser, user }) {
             }
         });
         setProjects(updatedArr);
+    }
+
+    function onUpdateTrip(updatedFlight, tripId) {
+         const updatedArr = trips.map(trip => {
+            if (trip.id === tripId) {
+                let updatedFlights = trip.flights.map(flight => {
+                    if (flight.id === updatedFlight.id) {
+                        return updatedFlight
+                    } else {
+                        return flight
+                    }
+                })
+                trip.flights = updatedFlights
+                return trip
+            } else {
+                return trip
+            }
+        })
+        setTrips(updatedArr)
     }
 
     return (
@@ -140,7 +160,7 @@ function Dashboard({ setUser, user }) {
                         <PassengerList user={user} passengers={passengers} onDelete={onDeletePassenger}/>
                     </Route>
                     <Route exact path='/trip/:tripId'>
-                        <TripView user={user} trips={trips}/>
+                        <TripView user={user} trips={trips} onUpdateTrip={onUpdateTrip} setTrips={setTrips}/>
                     </Route>
                     <Route exact path='/trips/add'>
                         <TripAdd user={user} projects={projects} passengers={passengers} onAdd={onAddTrip}/>

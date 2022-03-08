@@ -1,5 +1,6 @@
 import logo from '../assets/logo.png'
 import { NavLink, useHistory } from "react-router-dom";
+import '../styles/header.css'
 
 function Header({ user, setUser }) {
     let history = useHistory();

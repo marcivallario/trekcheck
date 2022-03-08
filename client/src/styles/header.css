@@ -1,0 +1,21 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    background: transparent;
+}
+
+#logo-container {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  margin: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}

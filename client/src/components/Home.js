@@ -8,7 +8,7 @@ function Home() {
     return (
         <div id="home">
             <div id="banner">
-                <div id="header">
+                <div id="banner-content">
                     <h1>All your trips, <br/> at your fingertips.</h1>
                     <p>Their journies begin and end with you, so your peace of mind is our business.</p>
                     <a href="#about"><button id="learn-more">Our Methods</button></a>

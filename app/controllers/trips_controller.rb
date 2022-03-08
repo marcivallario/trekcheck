@@ -20,6 +20,12 @@ class TripsController < ApplicationController
         render json: new_trip, status: :created
     end
 
+    def update
+        trip = Trip.find_by!(id: params[:id])
+        trip.update(trips_params)
+        render json: trip, status: :ok
+    end
+
     def destroy
         trip = Trip.find_by!(id: params[:id])
         trip.destroy
