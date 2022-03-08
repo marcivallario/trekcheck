@@ -1,26 +1,31 @@
-#passenger-view {
+#passenger-view, #passenger-edit {
     margin: 2rem;
     background: #fff;
     border-radius: 20px;
     padding: 20px;
 }
 
-#passenger-view h1 {
+#passenger-view h1, #passenger-edit h1 {
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
 
-#passenger-view-details {
+#passenger-view-details, #edit-passenger-form {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 250px 1fr;
     column-gap: 30px;
 }
 
-.view-label {
-    text-align: right;
+#edit-passenger-form {
+    row-gap: 10px;
 }
 
-button.passenger-edit {
+.view-label, .edit-label {
+    text-align: right;
+    font-weight: bold;
+}
+
+button.passenger-edit, input.passenger-edit {
     border-radius: 20px;
     border: none;
     padding: 3px 20px;
@@ -31,10 +36,14 @@ button.passenger-edit {
     margin-top: 20px;
 }
 
-button.passenger-edit:hover {
+button.passenger-edit:hover, input.passenger-edit:hover {
   border: 2px solid #4d626d;
   background-color: transparent;
   padding: 1px 18px;
   color: #4d626d;
   font-weight: 500;
+}
+
+#passenger-edit input {
+    max-width: 400px;
 }
