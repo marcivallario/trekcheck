@@ -1,6 +1,7 @@
 import { Layout, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { CheckOutlined,} from '@ant-design/icons';
+import '../styles/projectlist.css'
 
 function ProjectList({ user, projects, onDelete }) {
     const { Header, Footer, Content } = Layout;
@@ -48,25 +49,34 @@ function ProjectList({ user, projects, onDelete }) {
             name: project.job_name,
             client: project.client,
             active: (project.active) ? <CheckOutlined /> : <div></div>,
-            action: <><Link to={`/project/${project.id}`}>View</Link><p info={project.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/project/${project.id}`}>View</Link><button className="project-delete" info={project.id} onClick={handleDelete}>Delete</button></>
         }
     })
+
+    const today = new Date();
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+        return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
 
     return (
          <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
+                        <p>{formatDate(today)}</p>
+                        <p>Welcome, {user.first_name} {user.last_name}.</p>
                     </div>
                 </Header>
                 <Content>
-                    <h1>Projects</h1>
-                    <Table
-                            columns={columns}
-                            dataSource={data}
-                            size="small"
-                            pagination={{ pageSize: 25, hideOnSinglePage: true }}
-                        />
+                    <div id="project-list">
+                        <h1>Projects</h1>
+                        <Table
+                                columns={columns}
+                                dataSource={data}
+                                size="small"
+                                pagination={{ pageSize: 25, hideOnSinglePage: true }}
+                            />
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>

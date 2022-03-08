@@ -47,20 +47,3 @@ button.passenger-edit:hover, input.passenger-edit:hover, input.passenger-add:hov
 #passenger-edit input, #passenger-add input {
     max-width: 400px;
 }
-
-button.passenger-delete {
-    border-radius: 20px;
-    border: 2px solid transparent;
-    padding: 3px 10px;
-    background-color: #4d626d;
-    color: #eaeaef;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-button.passenger-delete:hover {
-    border: 2px solid #4d626d;
-    padding: 3px 10px;
-    background-color: transparent;
-    color: #4d626d;
-}
