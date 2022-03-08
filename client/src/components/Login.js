@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useHistory } from "react-router-dom";
+import '../styles/login.css'
 
 function Login({ setUser }) {
     let history = useHistory();
@@ -41,7 +42,7 @@ function Login({ setUser }) {
             <div id="login-container">
                 <h1>Login</h1>
                 <form id="login-form" onSubmit={handleSubmit}>
-                    <input name="email" placeholder="Email" className="user-input" onChange={handleChange}></input>
+                    <input className=""name="email" placeholder="Email" className="user-input" onChange={handleChange}></input>
                     <input name="password" type="password" placeholder="Password" className="user-input" onChange={handleChange}></input>
                     {errors ? <div className="error-container"><p className="error">{errors.error}</p></div> : <div></div>}
                     <input type="submit" value="Login" className="form-button"></input>
@@ -50,9 +51,7 @@ function Login({ setUser }) {
                     <p>Not a member? <NavLink
                                 to="/signup" 
                                 exact
-                                activeStyle={{
-                                textDecoration: "underline",
-                                }}>Sign up now! </NavLink></p>
+                                >Sign up now! </NavLink></p>
                 </div>
             </div>
         </div>

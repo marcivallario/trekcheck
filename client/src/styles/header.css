@@ -21,18 +21,19 @@ nav {
   gap: 20px;
 }
 
-nav a.active {
+nav a {
   color: #4d626d;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
 }
 
-nav a.active:hover {
+nav a:hover {
   font-style: italic;
+  color: #9499a4;
 }
 
-nav a.active:active {
+nav a:active {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
@@ -45,4 +46,12 @@ nav button {
   letter-spacing: 1px;
   background-color: #4d626d;
   color: #eaeaef;
+}
+
+nav button:hover {
+  border: 2px solid #4d626d;
+  background-color: transparent;
+  padding: 1px 18px;
+  color: #4d626d;
+  font-weight: 500;
 }
