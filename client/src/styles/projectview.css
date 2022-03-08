@@ -1,0 +1,49 @@
+#project-view, #project-edit, #project-add {
+    margin: 2rem;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#project-view h1, #project-edit h1, #project-add h1 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+#project-view-details, #edit-project-form {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    column-gap: 30px;
+}
+
+#edit-project-form {
+    row-gap: 10px;
+}
+
+.project-view-label {
+    text-align: right;
+    font-weight: bold;
+}
+
+#project-edit input, #project-add input {
+    max-width: 400px;
+}
+
+button.project-edit, input.project-edit {
+    border-radius: 20px;
+    border: none;
+    padding: 3px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #4d626d;
+    color: #eaeaef;
+    margin-top: 20px;
+}
+
+button.project-edit:hover, input.project-edit:hover {
+    border: 2px solid #4d626d;
+    background-color: transparent;
+    padding: 1px 18px;
+    color: #4d626d;
+    font-weight: 500;
+}

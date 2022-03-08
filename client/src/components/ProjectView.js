@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Layout } from 'antd';
+import '../styles/projectview.css'
 
 function ProjectView({ user, projects}) {
     const params = useParams();
@@ -73,23 +74,37 @@ function ProjectView({ user, projects}) {
             }
         })
     }
+    
+    const today = new Date();
+     const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+        return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
 
     if (!toggleEdit && project.id) {
         return (
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
+                        <p>{formatDate(today)}</p>
+                        <p>Welcome, {user.first_name} {user.last_name}.</p>
                     </div>
                 </Header>
                 <Content>
-                    <h1>Project: #{project.job_no} {project.client} "{project.job_name}"</h1>
-                    <p>Production Company: {project.production_co}</p>
-                    <p>Agency: {project.agency}</p>
-                    <p>Client: {project.client}</p>
-                    <label htmlFor="active">Active: </label>
-                    <input type="checkbox" id="active" name="active" checked={project.active} disabled/>
-                    <button onClick={toggleEditForm}>Edit</button>
+                    <div id="project-view">
+                        <h1>Project: #{project.job_no} {project.client} "{project.job_name}"</h1>
+                        <div id="project-view-details">
+                            <p className="project-view-label">Production Company: </p>
+                            <p>{project.production_co}</p>
+                            <p className="project-view-label">Agency: </p>
+                            <p>{project.agency}</p>
+                            <p className="project-view-label">Client: </p>
+                            <p>{project.client}</p>
+                            <label className="project-view-label" htmlFor="active">Active: </label>
+                            <input type="checkbox" id="active" name="active" checked={project.active} disabled/>
+                        </div>
+                        <button className="project-edit" onClick={toggleEditForm}>Edit</button>
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>
@@ -99,21 +114,35 @@ function ProjectView({ user, projects}) {
             <Layout className="site-layout" onSubmit={handleUpdate}>
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
+                        <p>{formatDate(today)}</p>
+                        <p>Welcome, {user.first_name} {user.last_name}.</p>
                     </div>
                 </Header>
                 <Content>
-                    <h1>Edit Project</h1>
-                    <form id="edit-project" >
-                        <input value={formData.job_no} name="job_no" onChange={handleChange}></input>
-                        <input value={formData.job_name} name="job_name" onChange={handleChange}></input>
-                        <input value={formData.production_co} name="production_co" onChange={handleChange}></input>
-                        <input value={formData.agency} name="agency" onChange={handleChange}></input>
-                        <input value={formData.client} name="client" onChange={handleChange}></input>
-                        <label htmlFor="active">Active?</label>
-                        <input type="checkbox" id="active" name="active" checked={formData.active} onChange={handleCheckedChange}/>
-                        <input type="submit" value="Save Changes" />
-                    </form>
+                    <div id="project-edit">
+                        <h1>Edit Project</h1>
+                        <form id="edit-project-form" >
+                            <label className="edit-label" htmlFor="job_no">Job #:</label>
+                            <input value={formData.job_no} name="job_no" onChange={handleChange}></input>
+
+                            <label className="edit-label" htmlFor="job_name">Job Name:</label>
+                            <input value={formData.job_name} name="job_name" onChange={handleChange}></input>
+
+                            <label className="edit-label" htmlFor="production_co">Production Company:</label>
+                            <input value={formData.production_co} name="production_co" onChange={handleChange}></input>
+
+                            <label className="edit-label" htmlFor="agency">Agency:</label>
+                            <input value={formData.agency} name="agency" onChange={handleChange}></input>
+
+                            <label className="edit-label" htmlFor="client">Client:</label>
+                            <input value={formData.client} name="client" onChange={handleChange}></input>
+
+                            <label className="edit-label" htmlFor="active">Active?</label>
+                            <input type="checkbox" id="active" name="active" checked={formData.active} onChange={handleCheckedChange}/>
+
+                            <input className="project-edit" type="submit" value="Save Changes" />
+                        </form>
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>

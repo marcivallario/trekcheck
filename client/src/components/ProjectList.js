@@ -45,7 +45,7 @@ function ProjectList({ user, projects, onDelete }) {
     const data = projects.map((project, index) => {
         return {
             key: (index),
-            job_no: project.job_no,
+            job_no: `#${project.job_no}`,
             name: project.job_name,
             client: project.client,
             active: (project.active) ? <CheckOutlined /> : <div></div>,
