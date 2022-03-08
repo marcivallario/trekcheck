@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import '../styles/flighteditmodal.css'
 
-function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle, setSelectedFlight, onUpdateTrip, setTrip }) {
+function TranspoEditModal({ setTrips, trips, toggleShow, transpo, trip, setToggle, setSelectedTranspo, setTrip, onUpdateTrip }) {
     const [ formData, setFormData ] = useState({
         trip_id: trip.id,
-        flight: flight.id,
-        leg: flight.leg,
-        airline: flight.airline,
-        flight_no: flight.flight_no,
-        dep_airport: flight.dep_airport,
-        dep_time: flight.dep_time,
-        arr_airport: flight.arr_airport,
-        arr_time: flight.arr_time,
-        seat: flight.seat,
-        confirmation: flight.confirmation,
-        notes: flight.notes
+        direction: transpo.direction,
+        date: transpo.date,
+        trans_mode: transpo.trans_mode,
+        confirmation: transpo.confirmation,
+        notes: transpo.notes
     })   
+
+    console.log(formData)
 
     function handleChange(e) {
         const key = e.target.name;
@@ -24,7 +20,7 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
     }
 
     function handleUpdate() {
-        fetch(`/flights/${flight.id}`, {
+        fetch(`/transportations/${transpo.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -44,17 +40,17 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
         })
     }
 
-    function onUpdateTrip(updatedFlight, tripId) {
+    function onUpdateTrip(updatedTranspo, tripId) {
          const updatedArr = trips.map(trip => {
             if (trip.id === tripId) {
-                let updatedFlights = trip.flights.map(flight => {
-                    if (flight.id === updatedFlight.id) {
-                        return updatedFlight
+                let updatedTranspos = trip.transportations.map(transpo => {
+                    if (transpo.id === updatedTranspo.id) {
+                        return updatedTranspo
                     } else {
-                        return flight
+                        return transpo
                     }
                 })
-                trip.flights = updatedFlights
+                trip.transportations = updatedTranspos
                 setTrip(trip)
                 return trip
             } else {
@@ -73,17 +69,12 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
         <div className="modal">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h4 className="modal-title">Edit Flight</h4>
+                    <h4 className="modal-title">Edit Transportation</h4>
                 </div>
                 <div className="modal-body">
-                    <input value={formData.leg} name="leg" onChange={handleChange}></input>
-                    <input value={formData.airline} name="airline" onChange={handleChange}></input>
-                    <input value={formData.flight_no} name="flight_no" onChange={handleChange}></input>
-                    <input value={formData.dep_airport} name="dep_airport" onChange={handleChange}></input>
-                    <input value={formData.dep_time} name="dep_time" onChange={handleChange}></input>
-                    <input value={formData.arr_airport} name="arr_airport" onChange={handleChange}></input>
-                    <input value={formData.arr_time} name="arr_time" onChange={handleChange}></input>
-                    <input value={formData.seat} name="seat" onChange={handleChange}></input>
+                    <input value={formData.direction} name="direction" onChange={handleChange}></input>
+                    <input value={formData.date} name="date" onChange={handleChange}></input>
+                    <input value={formData.trans_mode} name="trans_mode" onChange={handleChange}></input>
                     <input value={formData.confirmation} name="confirmation" onChange={handleChange}></input>
                     <input value={formData.notes} name="notes" onChange={handleChange}></input>
                 </div>
@@ -91,7 +82,7 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
                     <button type="button" className="button" onClick={handleUpdate}>Update</button>
                     <button type="button" className="button" onClick={() => {
                         setToggle(false)
-                        setSelectedFlight({})
+                        setSelectedTranspo({})
                         }}>Close</button>
                 </div>
             </div>
@@ -99,4 +90,4 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
     )
 }
 
-export default FlightEditModal;
+export default TranspoEditModal;

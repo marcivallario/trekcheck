@@ -74,3 +74,7 @@
 #twentyfour-grid > .twentyfour-item > .ant-card.ant-card-bordered {
   grid-area: 1 / 1 / 2 / 2;
 }
+
+.ant-layout.site-layout {
+    min-height: 100vh;
+}

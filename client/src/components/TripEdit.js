@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Layout, Collapse, Card } from 'antd';
 import FlightEditModal from './FlightEditModal';
+import TranspoEditModal from './TranspoEditModal';
 
     const { Panel } = Collapse;
 
-function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTrips, setToggleEdit, toggleEdit }) {
+function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTrips, setToggleEdit, toggleEdit, onUpdateTranspoTrip }) {
     const [ formData, setFormData ] = useState({
         user_id: user.id,
         depart: '',
@@ -13,6 +14,8 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
     })
     const [ toggleFlightEdit, setToggleFlightEdit ] = useState(false)
     const [ selectedFlight, setSelectedFlight ] = useState({});
+    const [ toggleTranspoEdit, setToggleTranspoEdit ] = useState(false)
+    const [ selectedTranspo, setSelectedTranspo ] = useState({});
 
     useEffect(() => {
         setFormData({
@@ -22,6 +25,8 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
             itinerary_sent: trip.itinerary_sent,
         })
     }, [])
+
+    console.log(trip);
 
     function handleChange(e) {
         const key = e.target.name;
@@ -58,9 +63,24 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
     }
 
 
-    // function renderEditTransportation() {
-    //     return (<div><p>edit transpo</p></div>)
-    // }
+    function renderTranspo(transportations) {
+        return (
+            transportations.map(transpo => {
+                return (
+                    <Card key={transpo.id} title={transpo.direction}>
+                        <p>Date: {formatDate(transpo.date)}</p>
+                        <p>Method: {transpo.trans_mode}</p>
+                        <p>{transpo.confirmation? `Confirmation #: ${transpo.confirmation}` : <></>}</p>
+                        <p>{transpo.notes? `Notes: ${transpo.notes}` : null }</p>
+                        <button type="button" onClick={() => {
+                            setToggleTranspoEdit(true)
+                            setSelectedTranspo(transpo)
+                            }}>Edit Transpo</button>
+                    </Card>
+                )
+            })
+        )
+    }
 
     // function renderEditAccommodation() {
     //     return (<div><p>edit accommodations</p></div>)
@@ -94,13 +114,13 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
                 <input value={formData.depart} name="depart" onChange={handleChange}></input>
                 <input value={formData.return} name="return" onChange={handleChange}></input>
                 <label htmlFor="itinerary_sent">Itinerary sent?</label>
-                <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={formData.active} onChange={handleCheckedChange}/>
+                <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={formData.itinerary_sent} onChange={handleCheckedChange}/>
                 <Collapse defaultActiveKey={[`${trip.flights.length > 0 ? '1' : <></>}`, `${trip.transportations.length > 0 ? '2' : <></>}`, `${trip.accommodations.length > 0 ? '3' : <></>}`]}>
                     <Panel header="Flights" key="1">
-                    {trip.flights.length > 0? renderFlights(trip.flights) : <button>Add Flight</button>}
+                    {trip.flights.length > 0? renderFlights(trip.flights) : <p>No flights on this trip!</p>/* <button>Add Flight</button>*/}
                     </Panel>
                     <Panel header="Transportation" key="2">
-                    {/* {trip.transportations.length > 0? <></> : <button>Add Transportation</button>} */}
+                    {trip.transportations.length > 0? renderTranspo(trip.transportations) : <p>No transportations on this trip!</p>}
                     </Panel>
                     <Panel header="Accommodations" key="3">
                     {/* {trip.accommodations.length > 0? renderEditAccommodation(trip.accommodations) : <p>Click edit to add an acommodation.</p>} */}
@@ -108,6 +128,8 @@ function TripEdit({ trips, trip, user, formatDate, onUpdateTrip, setTrip, setTri
                 </Collapse>
                 <input type="submit" value="Save Changes"/>
                 {!!Object.values(selectedFlight).length && <FlightEditModal toggleShow={toggleFlightEdit} flight={selectedFlight} trip={trip} setToggle={setToggleFlightEdit} setSelectedFlight={setSelectedFlight} onUpdateTrip={onUpdateTrip} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
+
+                {!!Object.values(selectedTranspo).length && <TranspoEditModal toggleShow={toggleTranspoEdit} onUpdateTranspoTrip={onUpdateTranspoTrip} transpo={selectedTranspo} trip={trip} setToggle={setToggleTranspoEdit} setSelectedTranspo={setSelectedTranspo} setTrip={setTrip} trips={trips} setTrips={setTrips}/>}
             </form>
             
         </div>

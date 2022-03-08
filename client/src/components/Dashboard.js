@@ -114,6 +114,25 @@ function Dashboard({ setUser, user }) {
         setTrips(updatedArr)
     }
 
+    function onUpdateTranspoTrip(updatedTranspo, tripId) {
+         const updatedArr = trips.map(trip => {
+            if (trip.id === tripId) {
+                let updatedTranspos = trip.transportations.map(transpo => {
+                    if (transpo.id === updatedTranspo.id) {
+                        return updatedTranspo
+                    } else {
+                        return transpo
+                    }
+                })
+                trip.transportations = updatedTranspos
+                return trip
+            } else {
+                return trip
+            }
+        })
+        setTrips(updatedArr)
+    }
+
     return (
       <div id="dashboard">
         <Layout style={{ minHeight: '100vh' }}>
@@ -160,7 +179,7 @@ function Dashboard({ setUser, user }) {
                         <PassengerList user={user} passengers={passengers} onDelete={onDeletePassenger}/>
                     </Route>
                     <Route exact path='/trip/:tripId'>
-                        <TripView user={user} trips={trips} onUpdateTrip={onUpdateTrip} setTrips={setTrips}/>
+                        <TripView user={user} trips={trips} onUpdateTrip={onUpdateTrip} setTrips={setTrips} onUpdateTranspoTrip={onUpdateTranspoTrip}/>
                     </Route>
                     <Route exact path='/trips/add'>
                         <TripAdd user={user} projects={projects} passengers={passengers} onAdd={onAddTrip}/>

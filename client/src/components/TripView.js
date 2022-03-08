@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Layout, Collapse, Card } from 'antd';
 import TripEdit from './TripEdit.js';
 
-function TripView({ trips, user, onUpdateTrip, setTrips }) {
+function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) {
     const params = useParams();
     const [toggleEdit, setToggleEdit] = useState(false);
     const [ trip, setTrip ] = useState({})
@@ -97,13 +97,13 @@ function TripView({ trips, user, onUpdateTrip, setTrips }) {
                     <p>Department: {trip.passenger.department}</p>
                     <Collapse defaultActiveKey={[`${trip.flights.length > 0 ? '1' : <></>}`, `${trip.transportations.length > 0 ? '2' : <></>}`, `${trip.accommodations.length > 0 ? '3' : <></>}`]}>
                         <Panel header="Flights" key="1">
-                        {trip.flights? renderFlights(trip.flights) : <p>Click edit to add a flight.</p>}
+                        {trip.flights.length > 0 ? renderFlights(trip.flights) : <p>No flights.</p>}
                         </Panel>
                         <Panel header="Transportation" key="2">
-                        {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>Click edit to add a method of transportation.</p>}
+                        {trip.transportations.length > 0? renderTransportation(trip.transportations) : <p>No transportations.</p>}
                         </Panel>
                         <Panel header="Accommodations" key="3">
-                        {trip.accommodations.length > 0? renderAccommodation(trip.accommodations) : <p>Click edit to add an acommodation.</p>}
+                        {trip.accommodations.length > 0? renderAccommodation(trip.accommodations) : <p>No accommodations.</p>}
                         </Panel>
                     </Collapse>
                     <button onClick={toggleEditForm}>Edit</button>
@@ -120,7 +120,7 @@ function TripView({ trips, user, onUpdateTrip, setTrips }) {
                     </div>
                 </Header>
                 <Content>
-                    <TripEdit trip={trip} user={user} formatDate={formatDate} onUpdateTrip={onUpdateTrip} setTrip={setTrip} trips={trips} setTrips={setTrips} setToggleEdit={setToggleEdit} toggleEdit={toggleEdit}/>
+                    <TripEdit trip={trip} user={user} formatDate={formatDate} onUpdateTrip={onUpdateTrip} setTrip={setTrip} trips={trips} setTrips={setTrips} setToggleEdit={setToggleEdit} toggleEdit={toggleEdit} onUpdateTranspoTrip={onUpdateTranspoTrip}/>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>
