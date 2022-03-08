@@ -62,7 +62,6 @@ function Dashboard({ setUser, user }) {
     }
 
     function onDeletePassenger(passengerIdToDelete) {
-        debugger
         setPassengers(passengers.filter(passenger => passenger.id !== parseInt(passengerIdToDelete)))
     }
 

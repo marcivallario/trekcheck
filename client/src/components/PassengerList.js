@@ -55,7 +55,7 @@ function PassengerList({ user, passengers, onDelete }) {
             department: passenger.department,
             cell: passenger.cell,
             email: passenger.email,
-            action: <><Link to={`/passenger/${passenger.id}`}>View</Link><p info={passenger.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/passenger/${passenger.id}`}>View</Link><button className="passenger-delete" info={passenger.id} onClick={handleDelete}>Delete</button></>
         }
     })
 

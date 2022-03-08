@@ -98,11 +98,11 @@ function PassengerView({ user, passengers }) {
         return (
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <div id="dashboard-header-content">
-                        <p>{formatDate(today)}</p>
-                        <p>Welcome, {user.first_name} {user.last_name}.</p>
-                    </div>
-                </Header>
+                <div id="dashboard-header-content">
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
+                </div>
+            </Header>
                 <Content>
                     <div id="passenger-view">
                         <h1>Passenger: {passenger.legal_first_name} {passenger.nickname? `"${passenger.nickname}"` : <></>} {passenger.legal_last_name}</h1>
@@ -139,10 +139,11 @@ function PassengerView({ user, passengers }) {
         return (
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
-                    </div>
-                </Header>
+                <div id="dashboard-header-content">
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
+                </div>
+            </Header>
                 <Content>
                     <div id="passenger-edit">
                         <h1>Edit Passenger</h1>
