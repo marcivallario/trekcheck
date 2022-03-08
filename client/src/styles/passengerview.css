@@ -1,0 +1,40 @@
+#passenger-view {
+    margin: 2rem;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#passenger-view h1 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+#passenger-view-details {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 30px;
+}
+
+.view-label {
+    text-align: right;
+}
+
+button.passenger-edit {
+    border-radius: 20px;
+    border: none;
+    padding: 3px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #4d626d;
+    color: #eaeaef;
+    margin-top: 20px;
+}
+
+button.passenger-edit:hover {
+  border: 2px solid #4d626d;
+  background-color: transparent;
+  padding: 1px 18px;
+  color: #4d626d;
+  font-weight: 500;
+}
