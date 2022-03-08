@@ -1,7 +1,7 @@
 import { Layout, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { CheckOutlined,} from '@ant-design/icons';
-import '../styles/passengerlist.css';
+import '../styles/triplist.css';
 
 function PassengerList({ user, trips, onDelete }) {
     const { Header, Footer, Content } = Layout;
@@ -41,33 +41,48 @@ function PassengerList({ user, trips, onDelete }) {
             key: 'action',
         }
     ];
+
+    const formatDateOnly = (dateString) => {
+        let d = new Date(dateString)
+        return (d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear();
+    }
+
     
     const data = trips.map((trip, index) => {
         return {
             key: (index),
             name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
-            date: `${trip.depart} — ${trip.return}`,
+            date: `${formatDateOnly(trip.depart)} — ${formatDateOnly(trip.return)}`,
             job_no: `#${trip.project.job_no}`,
             itinerary: (trip.itinerary_sent) ? <CheckOutlined /> : <div></div>,
-            action: <><Link to={`/trip/${trip.id}`}>View</Link><p info={trip.id} onClick={handleDelete}>Delete</p></>
+            action: <><Link to={`/trip/${trip.id}`}>View</Link><button className="trip-delete" info={trip.id} onClick={handleDelete}>Delete</button></>
         }
     })
+
+    const today = new Date();
+     const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+        return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
 
     return (
          <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
-                    </div>
-                </Header>
+                <div id="dashboard-header-content">
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
+                </div>
+            </Header>
                 <Content>
-                    <h1>Trips</h1>
-                    <Table
-                            columns={columns}
-                            dataSource={data}
-                            size="small"
-                            pagination={{ pageSize: 25, hideOnSinglePage: true }}
-                        />
+                    <div id="trip-list">
+                        <h1>Trips</h1>
+                        <Table
+                                columns={columns}
+                                dataSource={data}
+                                size="small"
+                                pagination={{ pageSize: 25, hideOnSinglePage: true }}
+                            />
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>
