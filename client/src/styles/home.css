@@ -165,6 +165,7 @@
   background-color: #4d626d;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
   color: #c3c2ca;
   font-size: 12px;
