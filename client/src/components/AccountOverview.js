@@ -39,6 +39,11 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
         return new Date(dateString).toLocaleTimeString(undefined, options)
     }
 
+    const formatDateOnly = (dateString) => {
+        let d = new Date(dateString)
+        return (d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear();
+    }
+
     const columns = [
         {
             title: 'Name',
@@ -80,7 +85,7 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
                 key: (index +1),
                 name: `${trip.passenger.legal_first_name} ${trip.passenger.legal_last_name}`,
                 project: `#${trip.project.job_no}`,
-                dates: `${trip.depart} - ${trip.return}`,
+                dates: `${formatDateOnly(trip.depart)} - ${formatDateOnly(trip.return)}`,
                 flight: (trip.flights.length > 0) ? <CheckOutlined /> : <div></div>,
                 view: <Link to={`/trip/${trip.id}`}>View</Link>
             }
