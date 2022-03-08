@@ -4,6 +4,7 @@ import '../styles/passengerlist.css';
 
 function PassengerList({ user, passengers, onDelete }) {
     const { Header, Footer, Content } = Layout;
+    let today = new Date();
 
     function handleDelete(e) {
         let passengerId = e.target.getAttribute("info");
@@ -58,21 +59,29 @@ function PassengerList({ user, passengers, onDelete }) {
         }
     })
 
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+        return new Date(dateString).toLocaleTimeString(undefined, options)
+    }
+
     return (
          <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
-                    </div>
+                <div id="dashboard-header-content">
+                    <p>{formatDate(today)}</p>
+                    <p>Welcome, {user.first_name} {user.last_name}.</p>
+                </div>
                 </Header>
                 <Content>
-                    <h1>Passengers</h1>
-                    <Table
-                            columns={columns}
-                            dataSource={data}
-                            size="small"
-                            pagination={{ pageSize: 5, hideOnSinglePage: true }}
-                        />
+                    <div id="passenger-list">
+                        <h1>Passengers</h1>
+                        <Table
+                                columns={columns}
+                                dataSource={data}
+                                size="small"
+                                pagination={{ pageSize: 5, hideOnSinglePage: true }}
+                            />
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
             </Layout>
