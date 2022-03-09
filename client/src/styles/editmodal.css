@@ -1,0 +1,63 @@
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 700px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px
+}
+
+.modal-header, .modal-footer {
+    padding: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-header h4 {
+    font-size: 20px;
+}
+
+.modal-title {
+    margin: 0
+}
+
+.modal-body {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 30px;
+}
+
+button.trip-edit-modal {
+    border-radius: 20px;
+    border: none;
+    padding: 3px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #4d626d;
+    color: #eaeaef;
+}
+
+button.trip-edit-modal:hover {
+  border: 2px solid #4d626d;
+  background-color: transparent;
+  padding: 1px 18px;
+  color: #4d626d;
+  font-weight: 500;
+}

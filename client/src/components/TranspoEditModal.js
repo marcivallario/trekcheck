@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/flighteditmodal.css'
+import '../styles/editmodal.css'
 
 function TranspoEditModal({ setTrips, trips, toggleShow, transpo, trip, setToggle, setSelectedTranspo, setTrip, onUpdateTrip }) {
     const [ formData, setFormData ] = useState({
@@ -72,15 +72,23 @@ function TranspoEditModal({ setTrips, trips, toggleShow, transpo, trip, setToggl
                     <h4 className="modal-title">Edit Transportation</h4>
                 </div>
                 <div className="modal-body">
+                    <label className="edit-label" htmlFor="direction">Direction:</label>
                     <input value={formData.direction} name="direction" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="date">Date: </label>
                     <input value={formData.date} name="date" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="trans_mode">Mode:</label>
                     <input value={formData.trans_mode} name="trans_mode" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="confirmation">Confirmation:</label>
                     <input value={formData.confirmation} name="confirmation" onChange={handleChange}></input>
+                    <label className="edit-label" htmlFor="notes">Notes:</label>
                     <input value={formData.notes} name="notes" onChange={handleChange}></input>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="button" onClick={handleUpdate}>Update</button>
-                    <button type="button" className="button" onClick={() => {
+                    <button className="trip-edit-modal"type="button"  onClick={handleUpdate}>Update</button>
+                    <button className="trip-edit-modal" type="button" onClick={() => {
                         setToggle(false)
                         setSelectedTranspo({})
                         }}>Close</button>

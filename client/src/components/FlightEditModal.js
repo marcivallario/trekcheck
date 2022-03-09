@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/flighteditmodal.css'
+import '../styles/editmodal.css'
 
 function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle, setSelectedFlight, onUpdateTrip, setTrip }) {
     const [ formData, setFormData ] = useState({
@@ -76,20 +76,39 @@ function FlightEditModal({ setTrips, trips, toggleShow, flight, trip, setToggle,
                     <h4 className="modal-title">Edit Flight</h4>
                 </div>
                 <div className="modal-body">
+                    <label className="edit-label" htmlFor="leg">Leg:</label>
                     <input value={formData.leg} name="leg" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="airline">Airline:</label>
                     <input value={formData.airline} name="airline" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="flight_no">Flight #:</label>
                     <input value={formData.flight_no} name="flight_no" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="dep_airport">Departure Airport</label>
                     <input value={formData.dep_airport} name="dep_airport" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="dep_time">Departure Date/Time:</label>
                     <input value={formData.dep_time} name="dep_time" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="arr_airport">Arrival Airport:</label>
                     <input value={formData.arr_airport} name="arr_airport" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="arr_time">Arrival Date/Time:</label>
                     <input value={formData.arr_time} name="arr_time" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="seat">Seat Assignment: </label>
                     <input value={formData.seat} name="seat" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="confirmation">Confirmation #:</label>
                     <input value={formData.confirmation} name="confirmation" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="notes">Notes:</label>
                     <input value={formData.notes} name="notes" onChange={handleChange}></input>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="button" onClick={handleUpdate}>Update</button>
-                    <button type="button" className="button" onClick={() => {
+                    <button className="trip-edit-modal" type="button" onClick={handleUpdate}>Update</button>
+                    <button  className="trip-edit-modal" type="button"  onClick={() => {
                         setToggle(false)
                         setSelectedFlight({})
                         }}>Close</button>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/flighteditmodal.css'
+import '../styles/editmodal.css'
 
 function FlightEditModal({ setTrips, trips, toggleShow, acc, trip, setToggle, setSelectedAcc, onUpdateTrip, setTrip }) {
     const [ formData, setFormData ] = useState({
@@ -80,22 +80,45 @@ function FlightEditModal({ setTrips, trips, toggleShow, acc, trip, setToggle, se
                     <h4 className="modal-title">Edit Accommodation</h4>
                 </div>
                 <div className="modal-body">
+                    <label className="edit-label" htmlFor="checkin">Checkin:</label>
                     <input value={formData.checkin} name="checkin" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="checkout">Checkout:</label>
                     <input value={formData.checkout} name="checkout" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="acc_type">Accommodation Type:</label>
                     <input value={formData.acc_type} name="acc_type" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="name">Name:</label>
                     <input value={formData.name} name="name" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="address_1">Address (line 1):</label>
                     <input value={formData.address_1} name="address_1" onChange={handleChange}></input>
-                    <input value={formData.address_2} onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="address_2">Address (line 2): </label>
+                    <input name="address_2" value={formData.address_2} onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="city">City:</label>
                     <input value={formData.city} name="city" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="state">State:</label>
                     <input value={formData.state} name="state" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="zip">Zip:</label>
                     <input value={formData.zip} name="zip" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="confirmation">Confirmation #:</label>
                     <input value={formData.confirmation} name="confirmation" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="phone">Phone:</label>
                     <input value={formData.phone} name="phone" onChange={handleChange}></input>
+
+                    <label className="edit-label" htmlFor="notes">Notes:</label>
                     <input value={formData.notes} name="notes" onChange={handleChange}></input>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="button" onClick={handleUpdate}>Update</button>
-                    <button type="button" className="button" onClick={() => {
+                    <button type="button" className="trip-edit-modal" onClick={handleUpdate}>Update</button>
+                    <button type="button" className="trip-edit-modal" onClick={() => {
                         setToggle(false)
                         setSelectedAcc({})
                         }}>Close</button>
