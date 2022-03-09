@@ -47,6 +47,8 @@ function Dashboard({ setUser, user }) {
         }
     }, [user.id])
 
+    console.log(trips);
+
     let history = useHistory();
     function handleLogout() {
         fetch('/logout', {
@@ -63,6 +65,8 @@ function Dashboard({ setUser, user }) {
 
     function onDeletePassenger(passengerIdToDelete) {
         setPassengers(passengers.filter(passenger => passenger.id !== parseInt(passengerIdToDelete)))
+        const updatedTrips = trips.filter(trip => trip.passenger_id !== parseInt(passengerIdToDelete))
+        setTrips(updatedTrips);
     }
 
     function onAddTrip(newTrip) {

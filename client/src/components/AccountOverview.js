@@ -12,25 +12,27 @@ function AccountOverview({ trips, projects, user, onUpdate }) {
 
     let upcomingFlights = [];
     const today = new Date();
-    if (trips.length > 0) {
+    if (trips.length > 0 ) {
         let tripsWithFlights = trips.filter(trip => trip.flights.length > 0)
-        tripsWithFlights.forEach(trip => {
-            trip.flights.sort((a,b) => {
-                const distancea = Math.abs(today - Date.parse(a.dep_time));
-                const distanceb = Math.abs(today - Date.parse(b.dep_time));
+        if (tripsWithFlights.length > 0) {
+            tripsWithFlights.forEach(trip => {
+                trip.flights.sort((a,b) => {
+                    const distancea = Math.abs(today - Date.parse(a.dep_time));
+                    const distanceb = Math.abs(today - Date.parse(b.dep_time));
+                    return distancea - distanceb;
+                })
+            })
+            tripsWithFlights.sort((a,b) => {
+                const distancea = Math.abs(today - Date.parse(a.flights[0].dep_time));
+                const distanceb = Math.abs(today - Date.parse(b.flights[0].dep_time));
                 return distancea - distanceb;
             })
-        })
-        tripsWithFlights.sort((a,b) => {
-            const distancea = Math.abs(today - Date.parse(a.flights[0].dep_time));
-            const distanceb = Math.abs(today - Date.parse(b.flights[0].dep_time));
-            return distancea - distanceb;
-        })
-        if (tripsWithFlights.length > 0) {
-            upcomingFlights = tripsWithFlights.filter(trip => {
-                let differenceMs = (Date.parse(trip.flights[0].dep_time) - today) / (60 * 60 * 1000)
-                return differenceMs <= 24 && differenceMs > 0
-            })
+            if (tripsWithFlights.length > 0) {
+                upcomingFlights = tripsWithFlights.filter(trip => {
+                    let differenceMs = (Date.parse(trip.flights[0].dep_time) - today) / (60 * 60 * 1000)
+                    return differenceMs <= 24 && differenceMs > 0
+                })
+            }
         }
     }
 

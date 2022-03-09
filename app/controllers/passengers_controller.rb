@@ -27,6 +27,7 @@ class PassengersController < ApplicationController
 
     def destroy
         passenger = Passenger.find_by!(id: params[:id])
+        passenger.trips.destroy_all
         passenger.destroy
         head :no_content
     end
