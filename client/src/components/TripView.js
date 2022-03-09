@@ -39,12 +39,23 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
             flights.map(flight => {
                 return (
                     <Card key={flight.id} title={flight.leg}>
-                        <p>Flight: {flight.airline} {flight.flight_no}</p>
-                        <p>Departs: {flight.dep_airport} @ {formatDate(flight.dep_time)}</p>
-                        <p>Arrives: {flight.arr_airport} @ {formatDate(flight.arr_time)}</p>
-                        <p>Seat: {flight.seat}</p>
-                        <p>Confirmation: {flight.confirmation}</p>
-                        {flight.notes? <p>Notes: {flight.notes}</p> : <></>}
+                        <div className="trip-detail-card">
+                            <p className="trip-view-label">Flight:</p>
+                            <p>{flight.airline} {flight.flight_no}</p>
+
+                            <p className="trip-view-label">Departs:</p>
+                            <p>{flight.dep_airport} @ {formatDate(flight.dep_time)}</p>
+
+                            <p className="trip-view-label">Arrives:</p>
+                            <p>{flight.arr_airport} @ {formatDate(flight.arr_time)}</p>
+
+                            <p className="trip-view-label">Seat:</p>
+                            <p>{flight.seat}</p>
+
+                            <p className="trip-view-label">Confirmation:</p>
+                            <p> {flight.confirmation}</p>
+                            {flight.notes? <><p className="trip-view-label">Notes:</p><p>{flight.notes}</p> </>: null}
+                        </div>
                     </Card>
                 )
             })
@@ -56,10 +67,17 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
             transportations.map(transpo => {
                 return (
                     <Card key={transpo.id} title={transpo.direction}>
-                        <p>Date: {formatDate(transpo.date)}</p>
-                        <p>Method: {transpo.trans_mode}</p>
-                        <p>{transpo.confirmation? `Confirmation #: ${transpo.confirmation}` : <></>}</p>
-                        <p>{transpo.notes? `Notes: ${transpo.notes}` : <></>}</p>
+                        <div className="trip-detail-card">
+                            <p className="trip-view-label">Date:</p>
+                            <p>{formatDate(transpo.date)}</p>
+
+                            <p className="trip-view-label">Method:</p>
+                            <p>{transpo.trans_mode}</p>
+
+                            {transpo.confirmation? <><p className="trip-view-label">Confirmation #:</p><p>{transpo.confirmation}</p></>: null}
+
+                            {transpo.notes? <><p className="trip-view-label">Notes:</p><p>{transpo.notes}</p></>: null}
+                        </div>
                     </Card>
                 )
             })
@@ -71,14 +89,30 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
             accommodations.map(acc=> {
                 return (
                     <Card  key={acc.id} title={acc.acc_type}>
-                        <p>{acc.name}</p>
-                        <p>{acc.address_1}</p>
-                        {acc.address_2? <p>{acc.address_2}</p> : <div></div>}
-                        <p>{acc.city}, {acc.state} {acc.zip}</p>
-                        <p>Phone: {acc.phone}</p>
-                        <p>Checkin: {formatDate(acc.checkin)}</p>
-                        <p>Checkout: {formatDate(acc.checkout)}</p>
-                        <p>Confirmation #{acc.confirmation}</p>
+                        <div className="trip-detail-card">
+                            <p className="trip-view-label">Name: </p>
+                            <p>{acc.name}</p>
+                            
+                            <p className="trip-view-label">Address:</p>
+                            <div>
+                                <p>{acc.address_1}</p>
+                                {acc.address_2? <p>{acc.address_2}</p> : null}
+                                <p>{acc.city}, {acc.state} {acc.zip}</p>
+                            </div>
+                            
+
+                            <p className="trip-view-label">Phone: </p>
+                            <p>{acc.phone}</p>
+                            
+                            <p className="trip-view-label">Checkin:</p>
+                            <p>{formatDate(acc.checkin)}</p>
+
+                            <p className="trip-view-label">Checkout:</p>
+                            <p>{formatDate(acc.checkout)}</p>
+
+                            <p className="trip-view-label">Confirmation #:</p>
+                            <p>{acc.confirmation}</p>
+                        </div>
                     </Card>
                 )
             })
@@ -136,7 +170,8 @@ function TripView({ trips, user, onUpdateTrip, setTrips, onUpdateTranspoTrip }) 
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div id="dashboard-header-content">
-                        <p>March 11th, 2022 11:19 AM. Welcome, {user.first_name} {user.last_name}.</p>
+                        <p>{formatDate(today)}</p>
+                        <p>Welcome, {user.first_name} {user.last_name}.</p>
                     </div>
                 </Header>
                 <Content>

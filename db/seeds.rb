@@ -19,13 +19,13 @@ trip1 = Trip.create!(depart: DateTime.new(2022, 3, 2), return: DateTime.new(2022
 trip2 = Trip.create!(depart: DateTime.new(2022, 3, 11), return: DateTime.new(2022, 3, 13), itinerary_sent: false, project_id: proj2.id, passenger_id: pass2.id)
 trip3 = Trip.create!(depart: DateTime.new(2022, 3, 10), return: DateTime.new(2022, 3, 15), itinerary_sent: true, project_id: proj1.id, passenger_id: pass3.id)
 
-flight3 = Flight.create(leg: 'return', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'LGA', dep_time: DateTime.new(2022,3,15,8,30), arr_airport: 'MCO', arr_time: DateTime.new(2022,3,15,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip3.id)
-flight1 = Flight.create(leg: 'outbound', airline: 'Delta Airlines', flight_no: 'DL3326', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,10,8,50), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,10,11,55), seat: '31A', confirmation: '34XJ8D', notes: 'One-Way, no internet on board', trip_id: trip3.id)
-flight2 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,11,8,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,11,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip2.id)
-flight4 = Flight.create(leg: 'outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,9,4,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,9,7,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip1.id)
+flight3 = Flight.create(leg: 'Return', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'LGA', dep_time: DateTime.new(2022,3,15,8,30), arr_airport: 'MCO', arr_time: DateTime.new(2022,3,15,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip3.id)
+flight1 = Flight.create(leg: 'Outbound', airline: 'Delta Airlines', flight_no: 'DL3326', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,10,8,50), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,10,11,55), seat: '31A', confirmation: '34XJ8D', notes: 'One-Way, no internet on board', trip_id: trip3.id)
+flight2 = Flight.create(leg: 'Outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,11,8,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,11,15,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip2.id)
+flight4 = Flight.create(leg: 'Outbound', airline: 'Southwest Airlines', flight_no: 'WN5840', dep_airport: 'MCO', dep_time: DateTime.new(2022,3,9,4,30), arr_airport: 'LGA', arr_time: DateTime.new(2022,3,9,7,35), seat: '3C', confirmation: '49HYY7', notes: 'One-Way, internet on board', trip_id: trip1.id)
 
-transpo1 = Transportation.create(direction: 'From home to airport', date: DateTime.new(2022,3,4), trans_mode: 'Enterprise VIP Rent-A-Car', confirmation: '9283437824732', trip_id: trip1.id)
-transpo2 = Transportation.create(direction: 'From airport to accommodations', date: DateTime.new(2022,3,4), trans_mode: 'Rideshare', confirmation: '483290578439', trip_id: trip1.id)
+transpo1 = Transportation.create(direction: 'From Home to Airport', date: DateTime.new(2022,3,4), trans_mode: 'Enterprise VIP Rent-A-Car', confirmation: '9283437824732', trip_id: trip1.id)
+transpo2 = Transportation.create(direction: 'From Airport to Accommodations', date: DateTime.new(2022,3,4), trans_mode: 'Rideshare', confirmation: '483290578439', trip_id: trip1.id)
 
 acc1 = Accommodation.create(checkin: DateTime.new(2022,3,4,10,30), checkout: DateTime.new(2022,3,5,15,30), acc_type: 'Hotel', name: 'Hilton Garden Inn', address_1: '42 Wallaby Way', city: 'Sydney', state: 'FL', zip: 32746, country: 'USA', confirmation: '438920843', phone: '407-404-2878', notes: 'No smoking', trip_id: trip1.id)
 

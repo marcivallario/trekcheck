@@ -3,6 +3,7 @@ import { Layout, Collapse, Card } from 'antd';
 import FlightEditModal from './FlightEditModal';
 import TranspoEditModal from './TranspoEditModal';
 import AccEditModal from './AccEditModal';
+import "../styles/tripview.css"
 
     const { Panel } = Collapse;
 

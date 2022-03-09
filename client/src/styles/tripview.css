@@ -10,10 +10,14 @@
     font-size: 1.5rem;
 }
 
-#trip-view-details {
+#trip-view-details, .trip-detail-card {
     display: grid;
     grid-template-columns: 125px 1fr;
     column-gap: 30px;
+    margin-bottom: 20px;
+}
+
+#trip-view .ant-card.ant-card-bordered {
     margin-bottom: 20px;
 }
 
