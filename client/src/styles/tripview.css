@@ -1,16 +1,16 @@
-#trip-view, #trip-edit {
+#trip-view, #trip-edit, #trip-add {
     margin: 2rem;
     background: #fff;
     border-radius: 20px;
     padding: 20px;
 }
 
-#trip-view h1, #trip-edit h1 {
+#trip-view h1, #trip-edit h1, #trip-add h1 {
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
 
-#trip-view-details, .trip-detail-card, #trip-edit-details {
+#trip-view-details, .trip-detail-card, #trip-edit-details, #add-trip-form {
     display: grid;
     grid-template-columns: 125px 1fr;
     column-gap: 30px;
@@ -21,7 +21,7 @@
     margin-bottom: 20px;
 }
 
-#trip-edit-details, #add-passenger-form {
+#trip-edit-details, #add-trip-form {
     row-gap: 10px;
 }
 
@@ -41,7 +41,7 @@ button.trip-edit, input.trip-edit, input.passenger-add {
     margin-top: 20px;
 }
 
-button.passenger-edit:hover, input.passenger-edit:hover, input.passenger-add:hover {
+button.trip-edit:hover, input.trip-edit:hover, input.trip-add:hover {
   border: 2px solid #4d626d;
   background-color: transparent;
   padding: 1px 18px;
@@ -49,6 +49,6 @@ button.passenger-edit:hover, input.passenger-edit:hover, input.passenger-add:hov
   font-weight: 500;
 }
 
-#trip-edit input, #passenger-add input {
+#trip-edit input, #trip-add input, #trip-add select {
     max-width: 400px;
 }

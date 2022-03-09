@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
 import { useState } from 'react';
+import "../styles/tripview.css";
 
 
 function TripAdd({ user, projects, passengers, onAdd }) {
@@ -68,22 +69,32 @@ const { Header, Footer, Content } = Layout;
                 </div>
             </Header>
             <Content>
-                <h1>Add New Trip</h1>
-                <form id="add-passenger-form" onSubmit={handleSubmit} >
-                    <select value={(formData.passenger_id)} name="passenger_id" onChange={handleDropdownChange}>
-                        <option value={0} disabled hidden>Choose a Passenger</option>
-                        {passengerOptions()}
-                    </select>
-                    <select value={(formData.project_id)} name="project_id" id="select-project" onChange={handleDropdownChange}>
-                        <option value={0} disabled hidden>Choose a Project</option>
-                        {projectOptions()}
-                    </select>
-                    <input placeholder="Depart" value={formData.depart} name="depart" onChange={handleChange}></input>
-                    <input placeholder="Return" value={formData.return} name="return" onChange={handleChange}></input>
-                    <label htmlFor="itinerary_sent">Itinerary sent?</label>
-                    <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={formData.itinerary_sent} onChange={handleCheckedChange}/>
-                    <input type="submit" value="Add" />
-                </form>
+                <div id="trip-add">
+                    <h1>Add New Trip</h1>
+                    <form id="add-trip-form" onSubmit={handleSubmit} >
+                        <label className="edit-label" htmlFor="passenger_id">Passenger:</label>
+                        <select value={(formData.passenger_id)} name="passenger_id" onChange={handleDropdownChange}>
+                            <option value={0} disabled hidden>Choose a Passenger</option>
+                            {passengerOptions()}
+                        </select>
+
+                        <label className="edit-label" htmlFor="project_id">Project:</label>
+                        <select value={(formData.project_id)} name="project_id" id="select-project" onChange={handleDropdownChange}>
+                            <option value={0} disabled hidden>Choose a Project</option>
+                            {projectOptions()}
+                        </select>
+
+                         <label className="edit-label" htmlFor="depart">Depart:</label>
+                        <input placeholder="Depart" value={formData.depart} name="depart" onChange={handleChange}></input>
+
+                        <label className="edit-label" htmlFor="return">Return:</label>
+                        <input placeholder="Return" value={formData.return} name="return" onChange={handleChange}></input>
+
+                        <label className="edit-label" htmlFor="itinerary_sent">Itinerary sent?</label>
+                        <input type="checkbox" id="itinerary_sent" name="itinerary_sent" checked={formData.itinerary_sent} onChange={handleCheckedChange}/>
+                        <input className="trip-edit" type="submit" value="Add" />
+                    </form>
+                </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>TrekCheck © 2022. All Rights Reserved.</Footer>
         </Layout>
