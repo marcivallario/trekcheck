@@ -1,4 +1,9 @@
 class TransportationsController < ApplicationController
+    def create
+        new_transpo = Transportation.create!(transpo_params)
+        render json: new_transpo, status: :created
+    end
+    
     def update
         transpo = Transportation.find_by(id: params[:id])
         transpo.update(transpo_params)

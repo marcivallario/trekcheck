@@ -47,8 +47,6 @@ function Dashboard({ setUser, user }) {
         }
     }, [user.id])
 
-    console.log(trips);
-
     let history = useHistory();
     function handleLogout() {
         fetch('/logout', {

@@ -1,4 +1,9 @@
 class AccommodationsController < ApplicationController
+    def create
+        new_acc = Accommodation.create!(acc_params)
+        render json: new_acc, status: :created
+    end
+    
     def update
         acc = Accommodation.find_by(id: params[:id])
         acc.update(acc_params)
